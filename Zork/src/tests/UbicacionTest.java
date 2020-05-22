@@ -38,8 +38,6 @@ public class UbicacionTest {
 		Npc pj1 = new Npc("Covit",'M',descripcion, frase, d1, 'S');
 		Npc pj = new Npc("Fantasma",'M',descripcion, frase, d1,'S');
 		
-		
-		
 		actual.agregarConexion(c1);
 		actual.agregarConexion(c2);
 		actual.agregarPlace(p1);
@@ -57,7 +55,7 @@ public class UbicacionTest {
 		
 		actual.getNpcs();
 		
-		//assertTrue(c2.getHabilitado());
+		assertTrue(c2.getHabilitado());
 	}
 
 }

@@ -8,7 +8,7 @@ import acciones.Moverse;
 import items.Inventario;
 import items.Item;
 
-public class Juego { // TODO: hecho, falta armar tests.
+public class Juego { 
 
 	public Ubicacion ubicacionActual;
 	public Inventario inventario;
@@ -22,8 +22,10 @@ public class Juego { // TODO: hecho, falta armar tests.
 	public String entradaJugador;
 	// TODO: agregar un objeto que guarde los pasos 
 	
-	public Juego(String filname) {
-		if(!cargarAventura(filname))
+	
+	/**NOTA: este contructor inicializa la aventura en base a un archivo de aventura */
+	public Juego(String filename) {
+		if(!cargarAventura(filename))
 			return;
 		ubicacionActual = ubicaciones.get(0);
 		System.out.println("Ingresa tu nombre: ");
@@ -47,6 +49,9 @@ public class Juego { // TODO: hecho, falta armar tests.
 		}
 	}
 	
+	public Juego() {
+	}
+
 	public boolean cargarAventura(String filename) {
 		file = new File(filename);
 		if(!file.canRead()) {
@@ -85,19 +90,11 @@ public class Juego { // TODO: hecho, falta armar tests.
 		muelle.agregarPlace(rincon);
 
 		
-		// TODO: ver como ejecutar estos 3 test desde Junit sin modificar la interface.
 		// asignacion de location inicial
 		ubicacionActual = muelle;
 		
 		//describirTest: mensaje inicial del juego
 		ubicacionActual.describir();
-		
-		//cambiarLocationTest: mensaje inicial del juego
-		Moverse moverse = new Moverse(this);
-		moverse.accionar(taberna);
-		
-		//cambiarLocationTestNOK
-		moverse.accionar(muelle);
 	}
 	
 	public Inventario getInventario() {
