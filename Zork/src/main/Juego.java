@@ -22,7 +22,6 @@ public class Juego {
 	
 	Scanner scann = new Scanner(System.in);
 	public String entradaJugador;
-	// TODO: agregar un objeto que guarde los pasos 
 	
 	
 	/**NOTA: este constructor inicializa la aventura en base a un archivo de aventura*/

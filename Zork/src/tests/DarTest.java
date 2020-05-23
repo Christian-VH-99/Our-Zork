@@ -19,26 +19,26 @@ public class DarTest {
 	}
 
 	@Test
-	public void testNpcVencido() {	
-		dar = new Dar(juego);		
+	public void testNpcNoVencido() {
 		juego.generarEntorno();
+		dar = new Dar(juego);
+		assertEquals("fantasma ", juego.getUbicacion().getNpcs());
+		dar.accionar("espejo", "fantasma");
+		assertEquals("fantasma ",juego.getUbicacion().getNpcs());
+	}
+	@Test
+	public void testNpcVencido() {	
+		juego.generarEntorno();
+		dar = new Dar(juego);		
 		
 		assertEquals("En tu inventario hay: una cerveza.",juego.getInventario().listarItems());
 		assertEquals("fantasma ", juego.getUbicacion().getNpcs());
 		dar.accionar("cerveza", "fantasma");
-//		
-//		assertEquals("No posees objetos en tu inventario.",juego.getInventario().listarItems());
-//		
+		
+		assertEquals("No posees objetos en tu inventario.",juego.getInventario().listarItems());
+		
 //		assertEquals("",juego.getUbicacion().getNpcs());
 		
 	}
-//	@Test
-//	public void testNpcNoVencido() {
-//		juego.generarEntorno();
-//		
-//		assertEquals("fantasma ", juego.getUbicacion().getNpcs());
-//		dar.accionar("espejo", "fantasma");
-//		assertEquals("fantasma ",juego.getUbicacion().getNpcs());
-//	}
 
 }
