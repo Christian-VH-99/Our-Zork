@@ -22,10 +22,11 @@ public class Moverse extends Accion{ // TODO: hecho, falta armar tests.
 	public void accionar(Ubicacion nuevaLocation) {
 	
 		Ubicacion ubicacion = juego.getUbicacion();
-		
-		if(ubicacion.sePuedeMoverAConexion(nuevaLocation)) {	
+		int permitido = ubicacion.sePuedeMoverAConexion(nuevaLocation);
+		if(permitido == 1) {	
 			juego.setLocation(nuevaLocation);
-		}else {
+			System.out.println(juego.getUbicacion().describir());
+		}else if(permitido == -1) {
 			System.out.println("no podes moverte ahi");
 		}
 	}

@@ -3,6 +3,8 @@ package Ubicacion;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import items.Item;
 //import items.Item;
 import jugadores.Npc;
 
@@ -79,10 +81,12 @@ public class Ubicacion { // TODO: hecho, falta armar tests.
 		}
 	}
 
-	public void getNpcs() {
+	public String getNpcs() {
+		String personajes = "";
 		for(Npc npc : npcs) {
-			System.out.println(npc.getNombreNpc());
+			personajes += npc.getNombreNpc() + " ";
 		}
+		return personajes;
 	}
 
 	public String getNombre() {
@@ -91,6 +95,11 @@ public class Ubicacion { // TODO: hecho, falta armar tests.
 	
 	private Character getGenero() {
 		return genero;
+	}
+	
+	public String getNombreGenero() {
+		
+		return (genero == 'F'?"la":"el")+" " + nombre;
 	}
 
 //// DESCRIPCION DE LA UBICACION ////
@@ -141,9 +150,11 @@ public class Ubicacion { // TODO: hecho, falta armar tests.
 			location = conexion.getLocation();
 
 			articuloIndeterminado = location.getGenero() == 'F' ? "una" : "un";
-
+			if(conexiones.size()==1) {
+				cadenaConexiones += articuloIndeterminado + " " +location.getNombre() + ".";
+			}
 			// si es el ultimo de la lista
-			if (indice + 1 == conexiones.size()) {
+			else if (indice + 1 == conexiones.size()) {
 				cadenaConexiones += "y " + articuloIndeterminado + " " + location.getNombre() + ".";
 			} else {
 				cadenaConexiones += articuloIndeterminado + " " + location.getNombre() + ", ";
@@ -153,8 +164,8 @@ public class Ubicacion { // TODO: hecho, falta armar tests.
 		return cadenaConexiones;
 	}
 
-
-	public boolean sePuedeMoverAConexion(Ubicacion nuevaLocation) {
+//// metodos que facilitan realizar las acciones ////
+	public int sePuedeMoverAConexion(Ubicacion nuevaLocation) {
 
 		Ubicacion location = null;
 
@@ -165,13 +176,25 @@ public class Ubicacion { // TODO: hecho, falta armar tests.
 			if (location.getNombre() == nuevaLocation.getNombre()) {
 
 				if (conexion.habilitado == true) {
-					return true;
+					return 1;
 				} else {
 					System.out.println("No podes pasar, hay un " + conexion.getObstaculo()); // TODO: revisar
-					return false;
+					return 0;
 				}
 			}
 		}
-		return false;
+		return -1;
+	}
+
+	public int darANpc(Item item, String sujeto) {
+		for (Npc npc : npcs) {
+			if(npc.getNombreNpc().equals(sujeto)) {
+				if(npc.attack(item))
+					return 1;
+				else
+					return 0;
+			}
+		}
+		return -1;
 	}
 }

@@ -24,6 +24,9 @@ public class Inventario {
 	}
 	public String listarItems() { 
 		int i=0;
+		if(inventory.values().size()==0) {
+			return "No posees objetos en tu inventario.";
+		}
 		String cadena = "En tu inventario hay: ";
 		for(Item item : inventory.values()) {
 			if(inventory.values().size() == 1) {
@@ -50,10 +53,19 @@ public class Inventario {
 		}
 		return aux;
 	}
+	
 //// AGREGAR ELEMENTO ////	
 	public void agregarItem(Item obj) {
 		inventory.put(obj.getNombre(), obj);
 		
+	}
+
+	public boolean buscarItem(String objeto) {
+		for(Item item : inventory.values()) {
+			if(item.getNombre().equals(objeto))
+				return true;
+		}
+		return false;
 	}
 	
 		

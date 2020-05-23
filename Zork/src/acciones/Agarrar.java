@@ -34,11 +34,15 @@ public class Agarrar extends Accion {
 		while(it.hasNext()) {
 			Place sitio = it.next();
 			item = sitio.getItem(objeto);
-			break;
+			if(item != null)
+				break;
 		}
-		inventario.agregarItem(item);
-		String salida = "Tinenes "+ item.toString() + "en tu inventario.";
-		System.out.println(salida);
+		if(item != null) {
+			inventario.agregarItem(item);
+			String salida = "Tienes "+ item.toString() + "en tu inventario.";
+			System.out.println(salida);			
+		}else
+			System.out.println("El objeto que quiere agarrar no existe");
 		// TODO Auto-generated method stub
 		
 	}

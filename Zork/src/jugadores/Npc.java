@@ -13,7 +13,7 @@ public class Npc {
 	//protected Item objetoDebilidad;
 	protected Debilidad debilidad;
 	protected Character numero;
-	protected Boolean derrotado = false;
+	//protected Boolean derrotado = false;
 	
 	
 
@@ -49,17 +49,19 @@ public class Npc {
 //		return objetoDebilidad;
 //	}
 	
-	public void attack(Item objeto) {
-		if(debilidad.derrotado(objeto)) {
+	public boolean attack(Item objeto) {
+		if(debilidad.efectividadItem(objeto)) {
 			System.out.println(debilidad.getDialogoDerrota());
-			setDerrotado(true);
+			//setDerrotado(true);
+			return true;
 		}else
-			System.out.println("No ha servido de nada");
+			System.out.print("No ha servido de nada");
+		return false;
 	}
 
-	public void setDerrotado(Boolean derrotado) {
-		this.derrotado = derrotado;
-	}
+//	public void setDerrotado(Boolean derrotado) {
+//		this.derrotado = derrotado;
+//	}
 	
 
 }
