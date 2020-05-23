@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import Ubicacion.*;
-import acciones.Moverse;
+//import acciones.Moverse;
 import items.Inventario;
 import items.Item;
+import jugadores.Debilidad;
+import jugadores.Npc;
 
 public class Juego {
 
@@ -75,9 +77,20 @@ public class Juego {
 		/**Creo las locations*/
 		Ubicacion taberna = new Ubicacion("taberna", 'F') ;
 		Ubicacion muelle = new Ubicacion("muelle", 'M') ;
-		Place mesa = new Place("Suelo",'F','S');
+		Ubicacion hotel = new Ubicacion("hotel",'M');
+		
+		Place mesa = new Place("Mesa",'F','S');
 		Place rincon = new Place("Rincon",'M','S');
+		Place cama = new Place("Cama",'F','S');
 		inventario = new Inventario();
+		
+		Item it1 = new Item("cerveza",'F','S');
+		inventario.agregarItem(it1);
+		
+		//set hotel
+		
+		hotel.agregarPlace(cama);
+		
 		//set taberna
 		
 		mesa.agregarItem(new Item("cuchillo",'M','S'));
@@ -86,9 +99,13 @@ public class Juego {
 		taberna.agregarPlace(mesa);
 
 		// set muelle
-		muelle.agregarConexion(new Conexion(taberna, "norte"));
+		muelle.agregarConexion(new Conexion(taberna, "norte","fantasma"));
+		muelle.agregarConexion(new Conexion(hotel,"oeste"));
 		rincon.agregarItem(new Item("espejo",'M','S'));
 		muelle.agregarPlace(rincon);
+		
+		Debilidad d1 = new Debilidad(it1,"- Me encanta la cerveza, te dejare pasar por esta vez","cantar"); //TODO: sacar el "cantar"
+		muelle.agregarNpc(new Npc("fantasma",'M',"- '¡No puedes pasar!' El pirata fantasma no te dejará pasar","¡No hay nada que me digas que me haga cambiar de opinión!",d1,'S'));
 
 		
 		// TODO: ver como ejecutar estos 3 test desde Junit sin modificar la interface.
@@ -99,11 +116,11 @@ public class Juego {
 		ubicacionActual.describir();
 		
 		//cambiarLocationTest: mensaje inicial del juego
-		Moverse moverse = new Moverse(this);
-		moverse.accionar(taberna);
+//		Moverse moverse = new Moverse(this);
+//		moverse.accionar(taberna);
 		
 		//cambiarLocationTestNOK
-		moverse.accionar(muelle);
+		//moverse.accionar(muelle);
 	}
 	
 	public Inventario getInventario() {
@@ -111,6 +128,10 @@ public class Juego {
 	}
 	public void setNombreJugador(String nombre) {
 		this.nombreJugador = nombre;
+	}
+	
+	public String getNombreJugador() {
+		return this.nombreJugador;
 	}
 
 	public void setLocation(Ubicacion ubicacion) {
