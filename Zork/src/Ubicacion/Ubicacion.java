@@ -8,7 +8,7 @@ import items.Item;
 //import items.Item;
 import jugadores.Npc;
 
-public class Ubicacion { // TODO: hecho, falta armar tests.
+public class Ubicacion {
 
 	private String nombre;
 	private Character genero;

@@ -2,7 +2,7 @@ package Ubicacion;
 
 //import java.util.Iterator;
 
-public class Conexion { // TODO: hecho, falta armar tests.
+public class Conexion { 
 	
 	protected Ubicacion ubicacion;
 	protected String direccion;

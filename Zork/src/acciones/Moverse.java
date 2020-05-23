@@ -3,7 +3,7 @@ package acciones;
 import Ubicacion.Ubicacion;
 import main.Juego;
 
-public class Moverse extends Accion{ // TODO: hecho, falta armar tests.
+public class Moverse extends Accion{
 
 	
 	Ubicacion ubicacionActual;

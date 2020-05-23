@@ -6,7 +6,7 @@ import items.Item;
 import main.Juego;
 
 public class Dar extends Accion {
-	// TODO:
+	
 	/*
 	 * Debera: -recibir un item y un npc -verificar que el item este en el
 	 * inventario -accionar el evenro -ver si es debilidad del npc -sacar el item

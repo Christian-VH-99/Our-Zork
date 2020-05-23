@@ -59,9 +59,4 @@ public class Npc {
 		return false;
 	}
 
-//	public void setDerrotado(Boolean derrotado) {
-//		this.derrotado = derrotado;
-//	}
-	
-
 }

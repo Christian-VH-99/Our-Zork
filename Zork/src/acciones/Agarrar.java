@@ -10,7 +10,7 @@ import main.Juego;
 
 public class Agarrar extends Accion {
 
-	//TODO:
+
 	/* Debera:
 		-recibir un item
 		-verificar si existe en la location actual (clase iterprete)
