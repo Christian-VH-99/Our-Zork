@@ -1,18 +1,17 @@
 package acciones;
-
 import Ubicacion.Ubicacion;
-import main.Juego;
+import jugadores.Jugador;
 
 public class Moverse extends Accion{
 
 	
 	Ubicacion ubicacionActual;
-	Juego juego;
+	Jugador jugador;
 	
-	public Moverse(Juego juego) {
+	public Moverse(Jugador jugador) {
 		
-		this.ubicacionActual = juego.getUbicacion();
-		this.juego = juego;
+		this.ubicacionActual = jugador.getUbicacionActual();
+		this.jugador = jugador;
 		nombre = "moverse";
 	}
 	
@@ -21,11 +20,9 @@ public class Moverse extends Accion{
 			 Habria que unificar la interfaz de todas las acciones con un objeto propertires*/
 	public void accionar(Ubicacion nuevaLocation) {
 	
-		Ubicacion ubicacion = juego.getUbicacion();
-		int permitido = ubicacion.sePuedeMoverAConexion(nuevaLocation);
+		int permitido = ubicacionActual.sePuedeMoverAConexion(nuevaLocation);
 		if(permitido == 1) {	
-			juego.setLocation(nuevaLocation);
-			System.out.println(juego.getUbicacion().describir());
+			jugador.setUbicacionActual(nuevaLocation);
 		}else if(permitido == -1) {
 			System.out.println("no podes moverte ahi");
 		}

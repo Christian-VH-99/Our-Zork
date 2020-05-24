@@ -3,6 +3,7 @@ package acciones;
 import Ubicacion.Ubicacion;
 import items.Inventario;
 import items.Item;
+import jugadores.Jugador;
 import main.Juego;
 
 public class Dar extends Accion {
@@ -17,9 +18,9 @@ public class Dar extends Accion {
 	Inventario inventario;
 	Ubicacion actual;
 
-	public Dar(Juego juego) {
-		inventario = juego.getInventario();
-		actual = juego.getUbicacion();
+	public Dar(Jugador jugador) {
+		inventario = jugador.getInventario();
+		actual = jugador.getUbicacionActual();
 		nombre = "dar";
 	}
 

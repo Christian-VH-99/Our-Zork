@@ -3,6 +3,7 @@ import java.util.List;
 
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
+import jugadores.Jugador;
 import main.Juego;
 
 
@@ -12,9 +13,8 @@ public class Mirar extends Accion {
 	Ubicacion ubicacionActual;
 	Juego juego;
 	
-	public Mirar(Juego juego) {
-		this.ubicacionActual = juego.getUbicacion();
-		this.juego = juego;
+	public Mirar(Jugador jugador) {
+		this.ubicacionActual = jugador.getUbicacionActual();
 		nombre="mirar";
 	}
 	
