@@ -2,6 +2,7 @@ package tests;
 
 
 import acciones.Informacion;
+import jugadores.Jugador;
 import main.Juego;
 
 
@@ -11,9 +12,8 @@ public class InformacionTest {
 
 	@Test
 	public void test() {
-		Juego juego = new Juego("Havacu");
-		juego.setNombreJugador("Havacu");
-		Informacion informacion= new Informacion(juego);
+		Jugador jugador = new Jugador("Havacu");
+		Informacion informacion= new Informacion(jugador);
 		informacion.accionar();
 	}
 

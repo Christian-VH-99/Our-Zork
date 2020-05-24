@@ -1,20 +1,18 @@
 package tests;
-
 import org.junit.Test;
-
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import acciones.Mirar;
 import items.Item;
-import main.Juego;
+import jugadores.Jugador;
+
 
 public class MirarTest {
-
 	
 	@Test
 	public void test() {
 		System.out.println("test1");
-		Juego juego = new Juego("Havacu");
+		Jugador jugador = new Jugador("Havacu");
 		Ubicacion casa = new Ubicacion("casa",'F');
 		Place mesa = new Place("mesa",'F','S');
 		Place mueble = new Place("mueble",'M','S');
@@ -27,8 +25,8 @@ public class MirarTest {
 		mueble.agregarItem(pintura);
 		casa.agregarPlace(mesa);
 		casa.agregarPlace(mueble);
-		juego.setLocation(casa);
-		Mirar mirar = new Mirar(juego);
+		jugador.setUbicacionActual(casa);
+		Mirar mirar = new Mirar(jugador);
 		
 		mirar.accionar();
 		mirar.accionar(mesa);		

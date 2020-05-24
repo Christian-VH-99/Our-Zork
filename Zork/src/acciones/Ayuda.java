@@ -1,6 +1,7 @@
 package acciones;
 
 import Ubicacion.Ubicacion;
+import jugadores.Jugador;
 import main.Juego;
 
 public class Ayuda extends Accion {
@@ -8,9 +9,9 @@ public class Ayuda extends Accion {
 	Ubicacion ubicacionActual;
 	Juego juego;
 	
-	public Ayuda(Juego juego) {
-		this.ubicacionActual = juego.getUbicacion();
-		this.juego = juego;
+	public Ayuda(Jugador jugador) {
+		this.ubicacionActual = jugador.getUbicacionActual();
+//		this.juego = juego;
 		nombre="ayuda";
 	}
 	

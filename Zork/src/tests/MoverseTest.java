@@ -7,11 +7,13 @@ import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import acciones.Moverse;
 import items.Item;
+import jugadores.Jugador;
 import main.Juego;
 
 public class MoverseTest {
 
 	static private Juego juego;
+	static private Jugador jugador;
 	private Moverse moverse;
 	static private Ubicacion taberna;
 	static private Ubicacion hotel;
@@ -20,7 +22,9 @@ public class MoverseTest {
 	@BeforeClass
 	public static void before() {
 
-		juego = new Juego();
+		jugador = new Jugador("Juanito");
+		juego = new Juego(jugador);
+		
 		juego.generarEntorno();
 
 		taberna = new Ubicacion("taberna", 'F');
@@ -38,26 +42,25 @@ public class MoverseTest {
 
 	@Test
 	public void moverseNotOK() {
-		
-		moverse = new Moverse(juego);
+		moverse = new Moverse(jugador);
 		moverse.accionar(taberna);
-		Ubicacion ubicacion =  juego.getUbicacion();
+		Ubicacion ubicacion =  jugador.getUbicacionActual();
 		assertEquals("Estas en el muelle. Hay un Rincon. Se ve a lo lejos una taberna, y un hotel.", ubicacion.describir());
 	}
 	
 	@Test
 	public void invalidaUbicacion() {
-		moverse = new Moverse(juego);
+		moverse = new Moverse(jugador);
 		moverse.accionar(casa);
-		Ubicacion ubicacion = juego.getUbicacion();
+		Ubicacion ubicacion = jugador.getUbicacionActual();
 		assertEquals("Estas en el muelle. Hay un Rincon. Se ve a lo lejos una taberna, y un hotel.", ubicacion.describir());
 		/* deberia imprimir que no puedo moverme ahi*/
 	}
 	@Test
 	public void moverseOK() {
-		moverse = new Moverse(juego);
+		moverse = new Moverse(jugador);
 		moverse.accionar(hotel);
-		Ubicacion ubicacion = juego.getUbicacion();
+		Ubicacion ubicacion = jugador.getUbicacionActual();
 		assertEquals("Estas en el hotel. Hay una Cama.", ubicacion.describir());
 	}
 	

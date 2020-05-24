@@ -6,6 +6,7 @@ import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import items.Inventario;
 import items.Item;
+import jugadores.Jugador;
 import main.Juego;
 
 public class Agarrar extends Accion {
@@ -24,9 +25,10 @@ public class Agarrar extends Accion {
 	Inventario inventario;
 	Item item;
 	
-	public Agarrar(Juego juego) {
-		this.ubicacionActual = juego.getUbicacion();
-		this.inventario = juego.getInventario();
+	public Agarrar(Jugador jugador) {
+//	public Agarrar(Juego juego) {
+		this.ubicacionActual = jugador.getUbicacionActual();
+		this.inventario = jugador.getInventario();
 		nombre = "agarrar";
 	}
 	public void accionar(Ubicacion actual, String objeto) {
@@ -43,7 +45,6 @@ public class Agarrar extends Accion {
 			System.out.println(salida);			
 		}else
 			System.out.println("El objeto que quiere agarrar no existe");
-		// TODO Auto-generated method stub
 		
 	}
 
