@@ -1,5 +1,6 @@
 package acciones;
 
+/*Clase para estructura sin Patron Chain, sacar cuando este implementado por completo.*/
 public abstract class Accion {
 
 	protected String nombre; 

@@ -4,7 +4,6 @@ import Ubicacion.Ubicacion;
 import jugadores.Jugador;
 import main.Juego;
 
-//public class Ayuda extends Accion {
 public class Ayuda extends AccionBase {
 
 	Ubicacion ubicacionActual;
@@ -12,9 +11,11 @@ public class Ayuda extends AccionBase {
 	
 	public Ayuda(Jugador jugador) {
 		this.ubicacionActual = jugador.getUbicacionActual();
+	}
+	public Ayuda() {
 		nombre="ayuda";
 	}
-	
+
 	/**Sacar luego de refactor con patron*/
 	public void accionar() {
 		String mensaje="estas ubicado en ";
@@ -28,6 +29,9 @@ public class Ayuda extends AccionBase {
 
 	@Override
 	public void ejecutar(Peticion peticion, Jugador jugador) {
+		
+		Ubicacion ubicacionActual = jugador.getUbicacionActual();
+		
 		String mensaje="estas ubicado en ";
 		mensaje += ubicacionActual.getNombreGenero();
 		mensaje += ". Puedes interactuar con todos los sitios e items que hay en este lugar\n" + 

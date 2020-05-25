@@ -3,33 +3,32 @@ import org.junit.Test;
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import acciones.Mirar;
+import acciones.Peticion;
 import items.Item;
 import jugadores.Jugador;
-
 
 public class MirarTest {
 	
 	@Test
-	public void test() {
-		System.out.println("test1");
+	public void queSePuedaMirarUnPlace() {
+		
 		Jugador jugador = new Jugador("Havacu");
 		Ubicacion casa = new Ubicacion("casa",'F');
 		Place mesa = new Place("mesa",'F','S');
-		Place mueble = new Place("mueble",'M','S');
 		Item botella = new Item("botella",'F','S');
 		Item cuchillo = new Item("cuchillo",'M','S');
-		Item pintura = new Item("pintura",'F','S');
 		
 		mesa.agregarItem(botella);
 		mesa.agregarItem(cuchillo);
-		mueble.agregarItem(pintura);
-		casa.agregarPlace(mesa);
-		casa.agregarPlace(mueble);
-		jugador.setUbicacionActual(casa);
-		Mirar mirar = new Mirar(jugador);
 		
-		mirar.accionar();
-		mirar.accionar(mesa);		
+		casa.agregarPlace(mesa);
+		
+		jugador.setUbicacionActual(casa);
+			
+		Mirar mirar = new Mirar();
+		mirar.ejecutar(new Peticion(mesa, "mirar"), jugador);
+		/*TODO: comprobar salida por consola*/
+		
 	}
 }
 

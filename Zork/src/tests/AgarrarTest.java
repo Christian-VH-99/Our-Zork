@@ -10,6 +10,7 @@ import acciones.Peticion;
 import jugadores.Jugador;
 import main.Juego;
 
+/**Probado con Patron*/
 public class AgarrarTest {
 
 	static private Juego juego;
@@ -23,30 +24,21 @@ public class AgarrarTest {
 	}
 
 	@Test
-	public void objetoExistente() {
+	public void queSePuedaAgarrarUnObjetoExist() {
 		
-		/*Prueba sin patron*/
-//		juego.generarEntorno();
-//		agarrar = new Agarrar(jugador);
-//		agarrar.accionar(jugador.getUbicacionActual(), "espejo");
-//		assertEquals("En tu inventario hay: una cerveza, y un espejo.", jugador.getInventario().listarItems());
-//	
-		/*Prueba con patron*/
 		juego.generarEntorno();
 		agarrar = new Agarrar();
-		agarrar.ejecutar(new Peticion(null, null, "espejo", "agarrar"), jugador);
+		agarrar.ejecutar(new Peticion("agarrar",null, null, "espejo"), jugador);
 		assertEquals("En tu inventario hay: una cerveza, y un espejo.", jugador.getInventario().listarItems());
 	
 	}
 
-	/*TODO:Probarlo con patron*/
 	@Test
-	public void objetoInexistente() {
+	public void queNoSePuedaAgarrarUnObjetoInexist() {
 		
-		/*Prueba sin patron*/
 		juego.generarEntorno();
-		agarrar = new Agarrar(jugador);
-		agarrar.accionar(jugador.getUbicacionActual(), "cuchillo");
+		agarrar = new Agarrar();
+		agarrar.ejecutar(new Peticion("agarrar", null, null, "cuchillo"), jugador);
 		assertEquals("En tu inventario hay: una cerveza.", jugador.getInventario().listarItems());
 		/* no deberia agregar nada al inventario, e imprime que el objeto no existe */
 		//TODO: agregar assert que compruebe la salida por consola

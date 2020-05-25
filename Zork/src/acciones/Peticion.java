@@ -2,6 +2,7 @@ package acciones;
 
 import com.sun.istack.internal.Nullable;
 
+import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import items.Item;
 
@@ -12,16 +13,25 @@ public class Peticion {
 	private Item item;
 	private String nombreItem;
 	private String nombreAccion;
+	private Place place;
 
 	
-	public Peticion(Ubicacion ubicacion, Item item, String nombreItem, String nombreAccion) {
+	public Peticion(String nombreAccion, Ubicacion ubicacion, Item item, String nombreItem) {
 		this.ubicacion = ubicacion;
 		this.item = item;
 		this.nombreItem = nombreItem;
 		this.nombreAccion = nombreAccion;
 	}
-
 	
+	/**Constructor para mirar*/
+	public Peticion(Place place, String nombreAccion) {
+		this.place = place;
+		this.nombreAccion = nombreAccion;
+	}
+
+	public Place getPlace() {
+		return place;
+	}
 
 	public String getNombreItem() {
 		return nombreItem;
