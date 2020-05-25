@@ -1,6 +1,5 @@
 package acciones;
 import java.util.List;
-
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import jugadores.Jugador;
@@ -8,7 +7,8 @@ import main.Juego;
 
 
 
-public class Mirar extends Accion { 
+//public class Mirar extends Accion { 
+	public class Mirar extends AccionBase { 
 
 	Ubicacion ubicacionActual;
 	Juego juego;
@@ -18,6 +18,10 @@ public class Mirar extends Accion {
 		nombre="mirar";
 	}
 	
+	public Mirar() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void accionar(){
 		System.out.println(ubicacionActual.describir());
 	}
@@ -55,5 +59,19 @@ public class Mirar extends Accion {
 //		else 
 //			System.out.println("el item no esta en esta localizacion"); 
 //	}
+
+	/*Patron*/
+	@Override
+	public void ejecutar(Peticion peticion, Jugador jugador) {
+		
+		if (peticion.getNombreAccion() == this.nombre) {
+
+			System.out.println(jugador.getUbicacionActual().describir());
+		
+		} else {
+			
+			this.AccionSiguiente.ejecutar(peticion, jugador);
+		}
+	}
 }
 
