@@ -27,7 +27,6 @@ public class MoverseTest {
 		jugador = new Jugador("Juanito");
 		juego = new Juego(jugador);
 
-
 		taberna = new Ubicacion("taberna", 'F');
 		hotel = new Ubicacion("hotel", 'M');
 		casa = new Ubicacion("casa", 'F');
@@ -58,8 +57,8 @@ public class MoverseTest {
 		Ubicacion ubicacion = jugador.getUbicacionActual();
 		assertEquals("Estas en el muelle. Hay un Rincon. Se ve a lo lejos una taberna, y un hotel.",
 				ubicacion.describir());
-		
-		//TODO: agregar assert que compare la salida por consola.
+
+		// TODO: agregar assert que compare la salida por consola.
 	}
 
 	@Test

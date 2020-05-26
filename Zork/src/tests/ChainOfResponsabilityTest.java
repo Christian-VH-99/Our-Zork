@@ -87,9 +87,6 @@ public class ChainOfResponsabilityTest {
 		
 		Ubicacion casa = new Ubicacion("casa",'F');
 		jugador.setUbicacionActual(casa);
-		jugador.setNombre("Havacu");
-		
-		accion.ejecutar(new Peticion("ayuda", null, null, null,null),jugador);
 	}
 	
 	@Test

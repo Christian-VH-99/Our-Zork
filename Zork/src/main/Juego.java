@@ -117,5 +117,4 @@ public class Juego {
 		jugador.setInventario(inventario);
 	}
 
-
 }

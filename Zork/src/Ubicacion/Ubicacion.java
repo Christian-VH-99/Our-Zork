@@ -14,7 +14,7 @@ public class Ubicacion {
 	private Character genero;
 	private List<Place> sitios;
 	private List<Conexion> conexiones;
-	private List<Npc>npcs;
+	private List<Npc> npcs;
 
 	public Ubicacion(String nombre, Character genero) {
 		this.genero = genero;
@@ -29,15 +29,15 @@ public class Ubicacion {
 	public void agregarConexion(Conexion conexion) {
 		conexiones.add(conexion);
 	}
-	
+
 	public void agregarPlace(Place sitio) {
 		sitios.add(sitio);
 	}
-	
+
 	public void agregarNpc(Npc personaje) {
 		npcs.add(personaje);
 	}
-	
+
 //// ELIMINAR ELEMENTOS DE LAS LISTAS ////
 	public boolean removeNpc(String personaje) {
 
@@ -60,30 +60,29 @@ public class Ubicacion {
 		return false;
 	}
 
-
 //// GETTERS ////
 	public String listarPlaces() {
 		String listaPlace = "";
 		for (Place sitio : sitios) {
-			listaPlace+=sitio.toString();
-			listaPlace+=", ";
+			listaPlace += sitio.toString();
+			listaPlace += ", ";
 		}
-		return listaPlace;	
+		return listaPlace;
 	}
-	
-	public List<Place> getPlace(){
+
+	public List<Place> getPlace() {
 		return sitios;
 	}
-	
+
 	public void getConexiones() {
-		for(Conexion conexion : conexiones) {
+		for (Conexion conexion : conexiones) {
 			System.out.println(conexion.getLocation().getNombre());
 		}
 	}
 
 	public String getNpcs() {
 		String personajes = "";
-		for(Npc npc : npcs) {
+		for (Npc npc : npcs) {
 			personajes += npc.getNombreNpc() + " ";
 		}
 		return personajes;
@@ -92,14 +91,14 @@ public class Ubicacion {
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	private Character getGenero() {
 		return genero;
 	}
-	
+
 	public String getNombreGenero() {
-		
-		return (genero == 'F'?"la":"el")+" " + nombre;
+
+		return (genero == 'F' ? "la" : "el") + " " + nombre;
 	}
 
 //// DESCRIPCION DE LA UBICACION ////
@@ -113,7 +112,7 @@ public class Ubicacion {
 
 		String cad = "Estas en " + articuloDeterminado + " " + getNombre() + ".";
 
-		if(!sitios.isEmpty())
+		if (!sitios.isEmpty())
 			cad += cadenaSitios();
 		if (!conexiones.isEmpty())
 			cad += cadenaConexiones();
@@ -126,9 +125,9 @@ public class Ubicacion {
 		Place sitio;
 		for (int indice = 0; indice < sitios.size(); indice++) {
 			sitio = sitios.get(indice);
-			if(sitios.size()==1)
-				cadenaSitios += sitio.toString() +".";
-			else if(indice + 1 == sitios.size()) 
+			if (sitios.size() == 1)
+				cadenaSitios += sitio.toString() + ".";
+			else if (indice + 1 == sitios.size())
 				cadenaSitios += "y " + sitio.toString() + "";
 			else
 				cadenaSitios += sitio.toString() + " ";
@@ -150,8 +149,8 @@ public class Ubicacion {
 			location = conexion.getLocation();
 
 			articuloIndeterminado = location.getGenero() == 'F' ? "una" : "un";
-			if(conexiones.size()==1) {
-				cadenaConexiones += articuloIndeterminado + " " +location.getNombre() + ".";
+			if (conexiones.size() == 1) {
+				cadenaConexiones += articuloIndeterminado + " " + location.getNombre() + ".";
 			}
 			// si es el ultimo de la lista
 			else if (indice + 1 == conexiones.size()) {
@@ -164,7 +163,6 @@ public class Ubicacion {
 		return cadenaConexiones;
 	}
 
-	
 	// TODO: cambiar valores de retorno por constantes (Enum)
 //// metodos que facilitan realizar las acciones ////
 	public int sePuedeMoverAConexion(Ubicacion nuevaLocation) {
@@ -187,12 +185,13 @@ public class Ubicacion {
 		}
 		return -1;
 	}
-	
-	// TODO: revisar este metodo, no es claro que devuelva valores, podria devolver una constante.
-	public int darANpc(Item item, String sujeto) { 
+
+	// TODO: revisar este metodo, no es claro que devuelva valores, podria devolver
+	// una constante.
+	public int darANpc(Item item, String sujeto) {
 		for (Npc npc : npcs) {
-			if(npc.getNombreNpc().equals(sujeto)) {
-				if(npc.attack(item))
+			if (npc.getNombreNpc().equals(sujeto)) {
+				if (npc.attack(item))
 					return 1;
 				else
 					return 0;
