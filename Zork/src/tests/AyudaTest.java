@@ -3,21 +3,23 @@ package tests;
 import org.junit.Test;
 import Ubicacion.Ubicacion;
 import acciones.Ayuda;
+import acciones.Peticion;
 import jugadores.Jugador;
 import main.Juego;
 
 public class AyudaTest {
 
 	@Test
-	public void test() {
-//		Juego juego = new Juego("Havacu");
-//		Juego juego = new Juego(jugador);
+	public void queSeMuestreMensajeDeAyuda() {
+		
 		Jugador jugador = new Jugador("Juanito");
 		Ubicacion casa = new Ubicacion("casa",'F');
 		jugador.setUbicacionActual(casa);
 		jugador.setNombre("Havacu");
-		Ayuda ayuda = new Ayuda(jugador);
-		ayuda.accionar();
+		Ayuda ayuda = new Ayuda();
+		ayuda.ejecutar(new Peticion("ayuda", null, null, null,null),jugador);
+		
+		//TODO: probar salida por consola.
 	}
 
 }

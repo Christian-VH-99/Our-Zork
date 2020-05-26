@@ -9,7 +9,6 @@ import items.Item;
 import jugadores.Jugador;
 import main.Juego;
 
-//public class Agarrar extends Accion {
 public class Agarrar extends AccionBase {
 
 	/*
@@ -22,47 +21,15 @@ public class Agarrar extends AccionBase {
 	Inventario inventario;
 	Item item;
 
-	/* De patron */
-//	public Agarrar(Jugador jugador) {
-//			this.ubicacionActual = jugador.getUbicacionActual();
-//			this.inventario = jugador.getInventario();
-//			nombre = "agarrar";
-//		}
-
-	/* NOTA: borrar cuando se implemente patron */
-	public Agarrar(Jugador jugador) {
-		this.ubicacionActual = jugador.getUbicacionActual();
-		this.inventario = jugador.getInventario();
-		nombre = "agarrar";
-	}
-
 	public Agarrar() {
 		nombre = "agarrar";
-
-	}
-
-	public void accionar(Ubicacion actual, String objeto) {
-		Iterator<Place> it = actual.getPlace().iterator();
-		while (it.hasNext()) {
-			Place sitio = it.next();
-			item = sitio.getItem(objeto);
-			if (item != null)
-				break;
-		}
-		if (item != null) {
-			inventario.agregarItem(item);
-			String salida = "Tienes " + item.toString() + "en tu inventario.";
-			System.out.println(salida);
-		} else
-			System.out.println("El objeto que quiere agarrar no existe");
-
 	}
 
 	/* Patron */
 	@Override
 	public void ejecutar(Peticion peticion, Jugador jugador) {
 
-		// TODO: ver si este if se puede subir a accionBase
+		// TODO: Separar este comportamiento en funciones y usar variables miembro.
 		if (peticion.getNombreAccion() == this.nombre) {
 
 			item = peticion.getItem();
@@ -80,10 +47,10 @@ public class Agarrar extends AccionBase {
 				System.out.println(salida);
 			} else
 				System.out.println("El objeto que quiere agarrar no existe");
-		
+
 		} else {
-			
-			this.AccionSiguiente.ejecutar(peticion, jugador);
+
+			this.accionSiguiente.ejecutar(peticion, jugador);
 		}
 
 	}

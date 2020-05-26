@@ -35,10 +35,10 @@ public class Place {
 	public char getNumero() {
 		return numero;
 	}
-	public Item getItem(String objeto) { /*remueve el item de la lista, lo saca del place donde se encuentra*/
+	public Item getItem(String nombreItem) { /*remueve el item de la lista, lo saca del place donde se encuentra*/
 		Item aux = null;
 		for (Item item : items) {
-			if(item.getNombre().equals(objeto)) {
+			if(item.getNombre().equals(nombreItem)) {
 				aux = new Item(item.getNombre(),item.getGenero(),item.getNumero());
 				items.remove(item);
 				break;
@@ -86,6 +86,15 @@ public class Place {
 		else
 			descripcionSitio += genero == 'F' ? "unas " : "unos ";
 		return descripcionSitio + getNombre();
+	}
+
+	public static void buscarYMostrarItems(Place place, List<Place> sitios) {
+		
+		if (sitios.contains(place) == true) {
+			System.out.println(place.listarItems());
+		} else {
+			System.out.print("sitio no existente para mirar");
+		}		
 	}
 	
 	

@@ -6,36 +6,46 @@ import items.Item;
 import jugadores.Jugador;
 import main.Juego;
 
-public class Dar extends Accion {
-	
-	/*
-	 * Debera: -recibir un item y un npc -verificar que el item este en el
-	 * inventario -accionar el evenro -ver si es debilidad del npc -sacar el item
-	 * del inventario -mostrar el mensaje adecuado al jugador -si el npc fue
-	 * derrotado, habiliatr las conexiones obstaculisadas por el y eliminarlo de la
-	 * lista de NPCs
-	 */
-	Inventario inventario;
-	Ubicacion actual;
+/*
+ * Debera: -recibir un item y un npc -verificar que el item este en el
+ * inventario -accionar el evenro -ver si es debilidad del npc -sacar el item
+ * del inventario -mostrar el mensaje adecuado al jugador -si el npc fue
+ * derrotado, habiliatr las conexiones obstaculisadas por el y eliminarlo de la
+ * lista de NPCs
+ */
+public class Dar extends AccionBase {
 
-	public Dar(Jugador jugador) {
-		inventario = jugador.getInventario();
-		actual = jugador.getUbicacionActual();
+
+	public Dar() {
 		nombre = "dar";
 	}
 
-	public void accionar(String objeto, String sujeto) {
-		Item item = inventario.getItem(objeto);
-		if (item != null) {
-			int vencido = actual.darANpc(item, sujeto);
-			if (vencido == 1) {
-				actual.removeNpc(sujeto);
-			} else if (vencido == 0)
-				System.out.println(". Intenta con otra cosa");
-			else
-				System.out.println("El personaje con el que quieres interactuar no existe.");
-		}else {
-			System.out.println("No posees ese objeto");
+	@Override
+	public void ejecutar(Peticion peticion, Jugador jugador) {
+
+		if (peticion.getNombreAccion() == this.nombre) {
+
+			Inventario inventario = jugador.getInventario();
+			Ubicacion ubicacionActual = jugador.getUbicacionActual();
+			String nombreItem = peticion.getNombreItem();
+			String nombreNPC = peticion.getNombreNPC();
+
+			Item item = inventario.getItem(nombreItem);
+			if (item != null) {
+				int vencido = ubicacionActual.darANpc(item, nombreNPC);
+				if (vencido == 1) {
+					ubicacionActual.removeNpc(nombreNPC);
+				} else if (vencido == 0) {
+					System.out.println(". Intenta con otra cosa");
+				} else {
+					System.out.println("El personaje con el que quieres interactuar no existe.");
+				}
+			} else {
+				System.out.println("No posees ese objeto");
+			}
+
+		} else {
+			accionSiguiente.ejecutar(peticion, jugador);
 		}
 	}
 

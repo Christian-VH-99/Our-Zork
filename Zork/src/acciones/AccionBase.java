@@ -1,18 +1,21 @@
 package acciones;
 
-public abstract class AccionBase implements AccionInterface {
+import jugadores.Jugador;
+
+public abstract class AccionBase {
 
 	protected String nombre; 
-	protected AccionInterface AccionSiguiente;
-	
-	// TODO: poner en super clase
-	public AccionInterface getAccionSiguiente() {
-		return AccionSiguiente;
+	protected AccionBase accionSiguiente;
+
+	/*handle*/
+	public abstract void ejecutar(Peticion peticion, Jugador jugador);
+
+	public AccionBase getAccionSiguiente() {
+		return accionSiguiente;
 	}
 
-	@Override
-	public void setSiguiente(AccionInterface siguiente) {
-		this.AccionSiguiente = siguiente;
+	public void setSiguiente(AccionBase siguiente) {
+		this.accionSiguiente = siguiente;
 	}
-	
+
 }
