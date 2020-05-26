@@ -1,10 +1,7 @@
 package tests;
-
 import static org.junit.Assert.assertEquals;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import acciones.AccionBase;

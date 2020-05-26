@@ -6,15 +6,15 @@ import items.Item;
 import jugadores.Jugador;
 import main.Juego;
 
+/*
+ * Debera: -recibir un item y un npc -verificar que el item este en el
+ * inventario -accionar el evenro -ver si es debilidad del npc -sacar el item
+ * del inventario -mostrar el mensaje adecuado al jugador -si el npc fue
+ * derrotado, habiliatr las conexiones obstaculisadas por el y eliminarlo de la
+ * lista de NPCs
+ */
 public class Dar extends AccionBase {
 
-	/*
-	 * Debera: -recibir un item y un npc -verificar que el item este en el
-	 * inventario -accionar el evenro -ver si es debilidad del npc -sacar el item
-	 * del inventario -mostrar el mensaje adecuado al jugador -si el npc fue
-	 * derrotado, habiliatr las conexiones obstaculisadas por el y eliminarlo de la
-	 * lista de NPCs
-	 */
 
 	public Dar() {
 		nombre = "dar";
