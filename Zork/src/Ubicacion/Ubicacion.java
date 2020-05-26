@@ -164,6 +164,8 @@ public class Ubicacion {
 		return cadenaConexiones;
 	}
 
+	
+	// TODO: cambiar valores de retorno por constantes (Enum)
 //// metodos que facilitan realizar las acciones ////
 	public int sePuedeMoverAConexion(Ubicacion nuevaLocation) {
 
@@ -185,8 +187,9 @@ public class Ubicacion {
 		}
 		return -1;
 	}
-
-	public int darANpc(Item item, String sujeto) {
+	
+	// TODO: revisar este metodo, no es claro que devuelva valores, podria devolver una constante.
+	public int darANpc(Item item, String sujeto) { 
 		for (Npc npc : npcs) {
 			if(npc.getNombreNpc().equals(sujeto)) {
 				if(npc.attack(item))

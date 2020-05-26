@@ -17,7 +17,7 @@ public class AyudaTest {
 		jugador.setUbicacionActual(casa);
 		jugador.setNombre("Havacu");
 		Ayuda ayuda = new Ayuda();
-		ayuda.ejecutar(new Peticion("ayuda", null, null, null),jugador);
+		ayuda.ejecutar(new Peticion("ayuda", null, null, null,null),jugador);
 		
 		//TODO: probar salida por consola.
 	}

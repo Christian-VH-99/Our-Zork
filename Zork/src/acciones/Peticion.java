@@ -1,7 +1,4 @@
 package acciones;
-
-import com.sun.istack.internal.Nullable;
-
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import items.Item;
@@ -13,10 +10,20 @@ public class Peticion {
 	private Item item;
 	private String nombreItem;
 	private String nombreAccion;
+	private String nombreNPC;
+
+	public String getNombreNPC() {
+		return nombreNPC;
+	}
+
+	public void setNombreNPC(String nombreNPC) {
+		this.nombreNPC = nombreNPC;
+	}
+
 	private Place place;
 
 	
-	public Peticion(String nombreAccion, Ubicacion ubicacion, Item item, String nombreItem) {
+	public Peticion(String nombreAccion, Ubicacion ubicacion, Item item, String nombreItem, String nombreNPC) {
 		this.ubicacion = ubicacion;
 		this.item = item;
 		this.nombreItem = nombreItem;

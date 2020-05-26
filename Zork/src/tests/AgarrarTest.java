@@ -28,7 +28,7 @@ public class AgarrarTest {
 		
 		juego.generarEntorno();
 		agarrar = new Agarrar();
-		agarrar.ejecutar(new Peticion("agarrar",null, null, "espejo"), jugador);
+		agarrar.ejecutar(new Peticion("agarrar",null, null, "espejo",null), jugador);
 		assertEquals("En tu inventario hay: una cerveza, y un espejo.", jugador.getInventario().listarItems());
 	
 	}
@@ -38,7 +38,7 @@ public class AgarrarTest {
 		
 		juego.generarEntorno();
 		agarrar = new Agarrar();
-		agarrar.ejecutar(new Peticion("agarrar", null, null, "cuchillo"), jugador);
+		agarrar.ejecutar(new Peticion("agarrar", null, null, "cuchillo",null), jugador);
 		assertEquals("En tu inventario hay: una cerveza.", jugador.getInventario().listarItems());
 		/* no deberia agregar nada al inventario, e imprime que el objeto no existe */
 		//TODO: agregar assert que compruebe la salida por consola
