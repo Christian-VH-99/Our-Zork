@@ -126,6 +126,8 @@ public class Juego {
 	}
 	public static void main(String[] args) {
 
+		// TODO: este es un ejemplo de como se haria, ahora debemos armar 
+		//esto pero con la historia final.
 		AccionBase accionBase;
 		Jugador jugador;
 		Juego juego;
