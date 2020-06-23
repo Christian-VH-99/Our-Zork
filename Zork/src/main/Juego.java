@@ -87,7 +87,9 @@ public class Juego {
 		// inventario
 		Inventario inventario = new Inventario();
 		Item it1 = new Item("cerveza", 'F', 'S');
+//		Item it2 = new Item("espejo", 'M', 'S'); //agregado
 		inventario.agregarItem(it1);
+//		inventario.agregarItem(it2);
 
 		// set hotel
 		hotel.agregarPlace(cama);
@@ -106,8 +108,6 @@ public class Juego {
 
 		Debilidad d1 = new Debilidad(it1, "- Me encanta la cerveza, te dejare pasar por esta vez", "cantar"); // TODO:
 																												// sacar
-																												// el
-																												// "cantar"
 		muelle.agregarNpc(new Npc("fantasma", 'M', "- '¡No puedes pasar!' El pirata fantasma no te dejará pasar",
 				"¡No hay nada que me digas que me haga cambiar de opinión!", d1, 'S'));
 

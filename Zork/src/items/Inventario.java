@@ -42,7 +42,7 @@ public class Inventario {
 		return cadena;
 		
 	}
-	public Item getItem(String objeto) { /* remueve el item del inentario*/
+	public Item getItem(String objeto) { /* remueve el item del inventario*/
 		Item aux = null;
 		for(Item item : inventory.values()) {
 			if(item.getNombre().equals(objeto)) {

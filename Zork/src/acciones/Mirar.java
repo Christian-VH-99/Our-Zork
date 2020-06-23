@@ -4,7 +4,6 @@ import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import jugadores.Jugador;
 
-/*Listo para Patron*/
 public class Mirar extends AccionBase {
 
 	public Mirar() {
@@ -19,12 +18,14 @@ public class Mirar extends AccionBase {
 
 			Ubicacion ubicacionActual = jugador.getUbicacionActual();
 
-			if(peticion.getPlace() != null) {
-			
-				Place place = peticion.getPlace();
+//			if(peticion.getPlace() != null) {
+			if(peticion.getNombrePlace() != null) {
+
+//				Place place = peticion.getPlace();
+				String nombrePlace = peticion.getNombrePlace();
 				List<Place> sitios = ubicacionActual.getPlace();
 				
-				Place.buscarYMostrarItems(place,sitios);
+				Place.buscarYMostrarItems(nombrePlace ,sitios);
 			
 			}else {	
 				/*si no le paso place, describe la ubicacion*/

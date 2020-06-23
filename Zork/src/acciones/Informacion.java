@@ -29,7 +29,5 @@ public class Informacion extends AccionBase {
 		} else {
 			this.accionSiguiente.ejecutar(peticion, jugador);
 		}
-
 	}
-
 }

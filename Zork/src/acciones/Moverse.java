@@ -14,15 +14,16 @@ public class Moverse extends AccionBase {
 
 		if (peticion.getNombreAccion() == this.nombre) {
 
-			Ubicacion nuevaUbicacion = peticion.getUbicacion();
 			Ubicacion ubicacionActual = jugador.getUbicacionActual();
+			String nombreUbicacion = peticion.getNombreUbicacion();
+			Ubicacion nuevaUbicacion = ubicacionActual.buscarUbicacionAMoverse(nombreUbicacion);
 
-			int permitido = ubicacionActual.sePuedeMoverAConexion(nuevaUbicacion);
-			if (permitido == 1) {
-				jugador.setUbicacionActual(nuevaUbicacion);
-			} else if (permitido == -1) {
-				System.out.println("no podes moverte ahi");
+			if(nuevaUbicacion != null) {
+				jugador.setUbicacionActual(nuevaUbicacion);				
+			}else {
+				System.out.println("no podes moverte ahi"); //TODO: ver como diferenciar entre que haya un obstaculo y que no exista esa ubicacion
 			}
+
 		} else {
 			accionSiguiente.ejecutar(peticion, jugador);
 		}

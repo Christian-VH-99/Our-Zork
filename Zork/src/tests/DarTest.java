@@ -29,7 +29,8 @@ public class DarTest {
 		juego.generarEntorno();
 		dar = new Dar();
 		assertEquals("fantasma ", jugador.getUbicacionActual().getNpcs());
-		dar.ejecutar(new Peticion("dar",null,null, "espejo","fantasma"),jugador );
+		dar.ejecutar(new Peticion("dar",null,"cerveza","fantasma",null),jugador );
+		assertEquals("",jugador.getUbicacionActual().getNpcs());
 	}
 	
 	@Test

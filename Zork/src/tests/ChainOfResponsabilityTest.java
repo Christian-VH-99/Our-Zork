@@ -1,4 +1,5 @@
 package tests;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,8 +24,8 @@ public class ChainOfResponsabilityTest {
 	static Jugador jugador;
 	static Juego juego;
 	static Agarrar accion;
-	static Informacion informacion; 
-
+	static Informacion informacion;
+	
 	@BeforeClass
 	static public void before() {
 
@@ -33,9 +34,9 @@ public class ChainOfResponsabilityTest {
 
 		Mirar mirar = new Mirar();
 
-		accion = new Agarrar();//incial
-		accion.setSiguiente(mirar);		
-		
+		accion = new Agarrar();// incial
+		accion.setSiguiente(mirar);
+
 		Ayuda ayuda = new Ayuda();
 		mirar.setSiguiente(ayuda);
 
@@ -44,10 +45,9 @@ public class ChainOfResponsabilityTest {
 
 		Moverse moverse = new Moverse();
 		informacion.setSiguiente(moverse);
-		
-		// probar luego de revisar Dar.
-//		Dar dar = new Dar();
-//		informacion.setSiguiente(dar);
+
+		Dar dar = new Dar();
+		informacion.setSiguiente(dar);
 
 	}
 
@@ -55,10 +55,10 @@ public class ChainOfResponsabilityTest {
 	public void queSeEjecuteAgarrar() {
 		juego.generarEntorno();
 
-		/**Antes de agarrar algo*/
+		/** Antes de agarrar algo */
 		assertEquals("En tu inventario hay: una cerveza.", jugador.getInventario().listarItems());
-		
-		accion.ejecutar(new Peticion("agarrar",null, null, "espejo",null), jugador);
+
+		accion.ejecutar(new Peticion("agarrar", null,  "espejo",null, null), jugador);
 		assertEquals("En tu inventario hay: una cerveza, y un espejo.", jugador.getInventario().listarItems());
 
 	}
@@ -78,49 +78,48 @@ public class ChainOfResponsabilityTest {
 		casa.agregarPlace(mesa);
 
 		jugador.setUbicacionActual(casa);
-		accion.ejecutar(new Peticion(mesa, "mirar"), jugador);
-		
+		accion.ejecutar(new Peticion("mirar", null, null, null, "mesa"), jugador);
+
 	}
-	
+
 	@Test
 	public void queSeEjecuteAyuda() {
-		
-		Ubicacion casa = new Ubicacion("casa",'F');
+
+		Ubicacion casa = new Ubicacion("casa", 'F');
 		jugador.setUbicacionActual(casa);
 	}
-	
+
 	@Test
 	public void queSeEjecuteInformacion() {
-		
-		Ubicacion casa = new Ubicacion("casa",'F');
+
+		Ubicacion casa = new Ubicacion("casa", 'F');
 		jugador.setUbicacionActual(casa);
-		accion.ejecutar(new Peticion("informacion", null, null, null,null),jugador);
-		
-		//TODO: agregar assert que valide la salida por consola.
+		accion.ejecutar(new Peticion("informacion", null, null, null, null), jugador);
+
+		// TODO: agregar assert que valide la salida por consola.
 	}
-	
+
 	@Test
 	public void queSeEjecuteMoverse() {
-		
+
 		Ubicacion hotel = new Ubicacion("hotel", 'M');
 		Place cama = new Place("Cama", 'F', 'S');
 
 		hotel.agregarPlace(cama);
-		
+
 		juego.generarEntorno();
-		accion.ejecutar(new Peticion("moverse", hotel, null, null, null), jugador);
+		accion.ejecutar(new Peticion("moverse", "hotel", null, null, null), jugador);
 		Ubicacion ubicacion = jugador.getUbicacionActual();
 		assertEquals("Estas en el hotel. Hay una Cama.", ubicacion.describir());
-		
 	}
-	
+
 // TODO: hay que revisar la accion dar pero Chain esta OK.
-//	@Test
-//	public void queSeEjecuteDar() {
-//		
-//		accion.ejecutar(new Peticion("dar",null,null, "espejo","fantasma"),jugador );
-//	}
-	
-	
-	
+	@Test
+	public void queSeEjecuteDar() {
+
+		juego.generarEntorno();
+		assertEquals("fantasma ", jugador.getUbicacionActual().getNpcs());
+		accion.ejecutar(new Peticion("dar", null, "cerveza", "fantasma", null), jugador);
+		assertEquals("", jugador.getUbicacionActual().getNpcs());
+	}
 }

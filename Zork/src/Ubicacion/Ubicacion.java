@@ -165,7 +165,7 @@ public class Ubicacion {
 
 	// TODO: cambiar valores de retorno por constantes (Enum)
 //// metodos que facilitan realizar las acciones ////
-	public int sePuedeMoverAConexion(Ubicacion nuevaLocation) {
+	public Ubicacion buscarUbicacionAMoverse(String nombreLocation) {
 
 		Ubicacion location = null;
 
@@ -173,17 +173,17 @@ public class Ubicacion {
 
 			location = conexion.getLocation();
 
-			if (location.getNombre() == nuevaLocation.getNombre()) {
+			if (location.getNombre().equals(nombreLocation)) { 
 
 				if (conexion.habilitado == true) {
-					return 1;
+					return location;
 				} else {
 					System.out.println("No podes pasar, hay un " + conexion.getObstaculo()); // TODO: revisar
-					return 0;
+					return null; //REVISAR
 				}
 			}
 		}
-		return -1;
+		return null;
 	}
 
 	// TODO: revisar este metodo, no es claro que devuelva valores, podria devolver
@@ -199,4 +199,5 @@ public class Ubicacion {
 		}
 		return -1;
 	}
+
 }
