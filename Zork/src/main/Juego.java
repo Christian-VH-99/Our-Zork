@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import Ubicacion.*;
+import acciones.AccionBase;
+import acciones.Agarrar;
+import acciones.Ayuda;
+import acciones.Dar;
+import acciones.Informacion;
+import acciones.Mirar;
+import acciones.Moverse;
+import acciones.Peticion;
 //import acciones.Moverse;
 import items.Inventario;
 import items.Item;
@@ -115,6 +123,58 @@ public class Juego {
 //		ubicacionActual = muelle;
 		jugador.setUbicacionActual(muelle);
 		jugador.setInventario(inventario);
+	}
+	public static void main(String[] args) {
+
+		AccionBase accionBase;
+		Jugador jugador;
+		Juego juego;
+		Agarrar accion;
+		Informacion informacion;
+		jugador = new Jugador("Juanito");
+		juego = new Juego(jugador);
+
+		Mirar mirar = new Mirar();
+
+		accion = new Agarrar();// incial
+		accion.setSiguiente(mirar);
+
+		Ayuda ayuda = new Ayuda();
+		mirar.setSiguiente(ayuda);
+
+		informacion = new Informacion();
+		ayuda.setSiguiente(informacion);
+
+		Moverse moverse = new Moverse();
+		informacion.setSiguiente(moverse);
+
+		Dar dar = new Dar();
+		informacion.setSiguiente(dar);
+
+		/*********************************************/
+		juego.generarEntorno();
+		/*********************************************/
+
+		String entradaTeclado = null;
+		Scanner entradaEscaner = null;
+		Interprete interprete = null;
+		Peticion peticion = null;
+
+		while (!jugador.esFinDeJuego()) {
+
+			entradaEscaner = new Scanner(System.in);
+			entradaTeclado = entradaEscaner.nextLine();
+
+			interprete = new Interprete(entradaTeclado);
+			peticion = interprete.generarPeticion();
+			accion.ejecutar(peticion, jugador);
+			
+			//Si se dan las condiciones de Ubicacion o item para terminar el juego
+//			if(condicionDeFinDeJuego) {				
+//				jugador.marcarFinDeJuego();
+//			}
+		}
+		System.out.println("Fin del juego, felicidades!");
 	}
 
 }

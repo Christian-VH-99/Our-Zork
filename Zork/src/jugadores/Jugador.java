@@ -44,7 +44,7 @@ public class Jugador {
 		return finDeJuego;
 	}
 	
-	public void marcarfinDeJuego() {
+	public void marcarFinDeJuego() {
 		finDeJuego = true;
 	}
 }
