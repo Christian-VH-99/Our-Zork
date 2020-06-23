@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import Ubicacion.*;
+import acciones.AccionBase;
+import acciones.Agarrar;
+import acciones.Ayuda;
+import acciones.Dar;
+import acciones.Informacion;
+import acciones.Mirar;
+import acciones.Moverse;
+import acciones.Peticion;
 //import acciones.Moverse;
 import items.Inventario;
 import items.Item;
@@ -87,7 +95,9 @@ public class Juego {
 		// inventario
 		Inventario inventario = new Inventario();
 		Item it1 = new Item("cerveza", 'F', 'S');
+//		Item it2 = new Item("espejo", 'M', 'S'); //agregado
 		inventario.agregarItem(it1);
+//		inventario.agregarItem(it2);
 
 		// set hotel
 		hotel.agregarPlace(cama);
@@ -106,8 +116,6 @@ public class Juego {
 
 		Debilidad d1 = new Debilidad(it1, "- Me encanta la cerveza, te dejare pasar por esta vez", "cantar"); // TODO:
 																												// sacar
-																												// el
-																												// "cantar"
 		muelle.agregarNpc(new Npc("fantasma", 'M', "- '¡No puedes pasar!' El pirata fantasma no te dejará pasar",
 				"¡No hay nada que me digas que me haga cambiar de opinión!", d1, 'S'));
 
@@ -116,6 +124,59 @@ public class Juego {
 		jugador.setUbicacionActual(muelle);
 		jugador.setInventario(inventario);
 	}
+	public static void main(String[] args) {
 
+		// TODO: este es un ejemplo de como se haria, ahora debemos armar 
+		//esto pero con la historia final.
+		AccionBase accionBase;
+		Jugador jugador;
+		Juego juego;
+		Agarrar accion;
+		Informacion informacion;
+		jugador = new Jugador("Juanito");
+		juego = new Juego(jugador);
+
+		Mirar mirar = new Mirar();
+
+		accion = new Agarrar();// incial
+		accion.setSiguiente(mirar);
+
+		Ayuda ayuda = new Ayuda();
+		mirar.setSiguiente(ayuda);
+
+		informacion = new Informacion();
+		ayuda.setSiguiente(informacion);
+
+		Moverse moverse = new Moverse();
+		informacion.setSiguiente(moverse);
+
+		Dar dar = new Dar();
+		informacion.setSiguiente(dar);
+
+		/*********************************************/
+		juego.generarEntorno();
+		/*********************************************/
+
+		String entradaTeclado = null;
+		Scanner entradaEscaner = null;
+		Interprete interprete = null;
+		Peticion peticion = null;
+
+		while (!jugador.esFinDeJuego()) {
+
+			entradaEscaner = new Scanner(System.in);
+			entradaTeclado = entradaEscaner.nextLine();
+
+			interprete = new Interprete(entradaTeclado);
+			peticion = interprete.generarPeticion();
+			accion.ejecutar(peticion, jugador);
+			
+			//Si se dan las condiciones de Ubicacion o item para terminar el juego
+//			if(condicionDeFinDeJuego) {				
+//				jugador.marcarFinDeJuego();
+//			}
+		}
+		System.out.println("Fin del juego, felicidades!");
+	}
 
 }

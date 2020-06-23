@@ -26,7 +26,7 @@ public class MirarTest {
 		jugador.setUbicacionActual(casa);
 			
 		Mirar mirar = new Mirar();
-		mirar.ejecutar(new Peticion(mesa, "mirar"), jugador);
+		mirar.ejecutar(new Peticion("mirar", null, null, null, "mesa"), jugador);
 		/*TODO: comprobar salida por consola*/
 		
 	}

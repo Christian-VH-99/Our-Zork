@@ -8,6 +8,7 @@ public class Jugador {
 	private Inventario inventario; 
 	private String nombre; 
 	private Ubicacion ubicacionActual;
+	private Boolean finDeJuego;
 
 	public Jugador(String nombre) {
 		this.nombre = nombre;
@@ -36,5 +37,14 @@ public class Jugador {
 	
 	public String getNombre() {
 		return nombre;
+	}
+
+	//TODO: evaluar si podria ir en Juego
+	public Boolean esFinDeJuego() {
+		return finDeJuego;
+	}
+	
+	public void marcarFinDeJuego() {
+		finDeJuego = true;
 	}
 }

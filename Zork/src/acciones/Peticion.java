@@ -1,4 +1,6 @@
 package acciones;
+
+
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import items.Item;
@@ -6,34 +8,62 @@ import items.Item;
 /*Request*/
 public class Peticion {
 
-	private Ubicacion ubicacion;
-	private Item item;
+	private Ubicacion ubicacion; //TODO: reem por los de abajo
+	private Item item;//TODO: reem por los de abajo
 	private String nombreItem;
 	private String nombreAccion;
-	private String nombreNPC;
 
-	public String getNombreNPC() {
-		return nombreNPC;
-	}
+	/*----------------------------*/
+	private String nombreUbicacion;
+	private String nombreNpc;
+	private String nombrePlace;
+	/*----------------------------*/
 
-	public void setNombreNPC(String nombreNPC) {
-		this.nombreNPC = nombreNPC;
-	}
 
 	private Place place;
 
-	
-	public Peticion(String nombreAccion, Ubicacion ubicacion, Item item, String nombreItem, String nombreNPC) {
-		this.ubicacion = ubicacion;
-		this.item = item;
+//	public Peticion(String nombreAccion, @Nullable Ubicacion ubicacion, @Nullable Item item,
+//			@Nullable String nombreItem, @Nullable String nombreNPC) {
+//
+//		//REVISAR: nombre NPC nunca se asigna aca
+//		this.ubicacion = ubicacion;
+//		this.item = item;
+//		this.nombreItem = nombreItem;
+//		this.nombreAccion = nombreAccion;
+//	}
+
+	/*
+	 * NOTA: este constructor es el que deberia quedar para tener una interfaz
+	 * normalizada y que el interprete solo valide que la semantica sea correcta (no
+	 * buscara que la ubicacion este en la lista de ubicaciones accesibles
+	 * actualmente)
+	 */
+	public Peticion(String nombreAccion, String nombreUbicacion, String nombreItem, String nombreNpc,String nombrePlace) {
+
+		this.nombrePlace = nombrePlace;
+		this.nombreUbicacion = nombreUbicacion;
 		this.nombreItem = nombreItem;
+		this.nombreNpc = nombreNpc;
+		this.nombreAccion = nombreAccion;
+	}
+
+
+	/** Constructor para mirar TODO: normalizar contructores */
+	public Peticion(Place place, String nombreAccion) {
+//		this.place = place;
 		this.nombreAccion = nombreAccion;
 	}
 	
-	/**Constructor para mirar*/
-	public Peticion(Place place, String nombreAccion) {
-		this.place = place;
-		this.nombreAccion = nombreAccion;
+	public String getNombrePlace() {
+		return nombrePlace;
+	}
+
+	public String getNombreUbicacion() {
+		return nombreUbicacion;
+	}
+
+	public String getNombreNpc() {
+		return nombreNpc;
 	}
 
 	public Place getPlace() {
@@ -44,32 +74,20 @@ public class Peticion {
 		return nombreItem;
 	}
 
-	public void setNombreItem(String nombreItem) {
-		this.nombreItem = nombreItem;
-	}
-
-
 	public Ubicacion getUbicacion() {
 		return ubicacion;
-	}
-
-	public void setUbicacion(Ubicacion ubicacion) {
-		this.ubicacion = ubicacion;
 	}
 
 	public Item getItem() {
 		return item;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
 	public String getNombreAccion() {
 		return nombreAccion;
 	}
 
-	public void setNombreAccion(String nombreAccion) {
-		this.nombreAccion = nombreAccion;
+	public String getNombrePLace() {
+		return nombrePlace;
 	}
+
 }

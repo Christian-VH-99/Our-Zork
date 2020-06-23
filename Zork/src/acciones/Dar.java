@@ -28,7 +28,7 @@ public class Dar extends AccionBase {
 			Inventario inventario = jugador.getInventario();
 			Ubicacion ubicacionActual = jugador.getUbicacionActual();
 			String nombreItem = peticion.getNombreItem();
-			String nombreNPC = peticion.getNombreNPC();
+			String nombreNPC = peticion.getNombreNpc();
 
 			Item item = inventario.getItem(nombreItem);
 			if (item != null) {

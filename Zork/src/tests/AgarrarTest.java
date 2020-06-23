@@ -28,19 +28,20 @@ public class AgarrarTest {
 		
 		juego.generarEntorno();
 		agarrar = new Agarrar();
-		agarrar.ejecutar(new Peticion("agarrar",null, null, "espejo",null), jugador);
+		agarrar.ejecutar(new Peticion("agarrar",null, "espejo", null,null), jugador);
 		assertEquals("En tu inventario hay: una cerveza, y un espejo.", jugador.getInventario().listarItems());
-	
 	}
+
 
 	@Test
 	public void queNoSePuedaAgarrarUnObjetoInexist() {
 		
 		juego.generarEntorno();
 		agarrar = new Agarrar();
-		agarrar.ejecutar(new Peticion("agarrar", null, null, "cuchillo",null), jugador);
-		assertEquals("En tu inventario hay: una cerveza.", jugador.getInventario().listarItems());
+		agarrar.ejecutar(new Peticion("agarrar", null, "asd", null ,null), jugador);
+		assertEquals("En tu inventario hay: una cerveza, y un espejo.", jugador.getInventario().listarItems());
 		/* no deberia agregar nada al inventario, e imprime que el objeto no existe */
 		//TODO: agregar assert que compruebe la salida por consola
+			//El objeto que quiere agarrar no existe
 	}
 }
