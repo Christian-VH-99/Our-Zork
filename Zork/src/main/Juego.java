@@ -1,6 +1,7 @@
 package main;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -124,10 +125,11 @@ public class Juego {
 		jugador.setUbicacionActual(muelle);
 		jugador.setInventario(inventario);
 	}
+
 	public static void main(String[] args) {
 
-		// TODO: este es un ejemplo de como se haria, ahora debemos armar 
-		//esto pero con la historia final.
+		// TODO: este es un ejemplo de como se haria, ahora debemos armar
+		// esto pero con la historia final.
 		AccionBase accionBase;
 		Jugador jugador;
 		Juego juego;
@@ -162,21 +164,32 @@ public class Juego {
 		Interprete interprete = null;
 		Peticion peticion = null;
 
-		while (!jugador.esFinDeJuego()) {
-
+		do {
 			entradaEscaner = new Scanner(System.in);
 			entradaTeclado = entradaEscaner.nextLine();
 
 			interprete = new Interprete(entradaTeclado);
 			peticion = interprete.generarPeticion();
 			accion.ejecutar(peticion, jugador);
-			
-			//Si se dan las condiciones de Ubicacion o item para terminar el juego
-//			if(condicionDeFinDeJuego) {				
-//				jugador.marcarFinDeJuego();
-//			}
-		}
+
+		} while (!juego.esFinDeJuego(peticion, jugador));
+
 		System.out.println("Fin del juego, felicidades!");
+	}
+
+	private boolean esFinDeJuego(Peticion peticion, Jugador jugador2) {
+		
+		// hay que cargarlo en base a historia
+		ArrayList<Peticion> condicionesFinDeJuegoList = new ArrayList<Peticion>();
+
+		
+		//NOTA: se debera comparar el estado actual del jugador con cada uno de los finales posibles
+		for (Peticion peticion2 : condicionesFinDeJuegoList) {
+			
+		}
+		
+		
+		return false;
 	}
 
 }
