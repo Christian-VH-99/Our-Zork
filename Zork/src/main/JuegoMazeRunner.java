@@ -59,15 +59,18 @@ public class JuegoMazeRunner {
 		Ubicacion puertaNorte = new Ubicacion("puerta norte", 'F');
 		puertaNorte.setMensajeDeingreso(
 				"“¡Has entrado al Laberinto por el Norte! Recorres un largo tramo hasta que te encuentras con una situación inesperada. En el piso, junto a una de las paredes del Laberinto, se encuentra un Corredor. Pero algo extraño sucede…¡se está desangrando! Del otro lado, se encuentra una cantimplora seguramente con agua. Decide que hacer");
-		
-		/********************************************/
-		Ubicacion salidaNorte= new Ubicacion("salida norte", 'F');
-		salidaNorte.setMensajeDeingreso("“¡Has encontrado una salida! Por fin sales al exterior. Comienzas a sentir la fresca brisa del día cuando de repente… ¡eres atravesado por un brazo en forma de cuchilla! El Penitente que has derrotado no estaba solo, su amigo ha vengado su muerte. Después de un tiempo, el nombre Thomas es agregado a la lista de fallecidos.");
-		
+
 		/********************************************/
 		Ubicacion segundaZonaNorte = new Ubicacion("segunda zona norte", 'F');
+		// este seria el mensaje del NPC penitente
 		segundaZonaNorte.setMensajeDeingreso("¡Cuidado! Te has cruzado con un Penitente. Decide rápido que hacer.");
-		
+//		segundaZonaNorte.agregarNpc(new Npc("Centinella", "", descripcion, talk, debilidad, num));
+
+		/********************************************/
+		Ubicacion salidaNorte = new Ubicacion("salida norte", 'F');
+		salidaNorte.setMensajeDeingreso(
+				"“¡Has encontrado una salida! Por fin sales al exterior. Comienzas a sentir la fresca brisa del día cuando de repente… ¡eres atravesado por un brazo en forma de cuchilla! El Penitente que has derrotado no estaba solo, su amigo ha vengado su muerte. Después de un tiempo, el nombre Thomas es agregado a la lista de fallecidos.");
+
 		/********************************************/
 		Ubicacion puertaSur = new Ubicacion("puerta sur", 'F');
 
@@ -97,7 +100,6 @@ public class JuegoMazeRunner {
 
 		salaDeMapas.agregarConexion(new Conexion(fogata, "oeste"));
 		zonaDeSuministros.agregarConexion(new Conexion(fogata, "este"));
-		
 
 		/******************* Jugador ****************/
 
@@ -147,15 +149,19 @@ public class JuegoMazeRunner {
 			entradaTeclado = entradaEscaner.nextLine();
 
 			interprete = new Interprete(entradaTeclado);
-			peticion = interprete.generarPeticion();
-			accion.ejecutar(peticion, jugador);
+			
+			if (interprete != null) {
+				peticion = interprete.generarPeticion();
+				accion.ejecutar(peticion, jugador); // chain
+			} else {
+				System.out.println("comando incorrecto");
+			}
 
 		} while (!juego.esFinDeJuego(peticion, jugador));
 
-		System.out.println("Fin del juego, felicidades!");
 	}
 
-	private boolean esFinDeJuego(Peticion peticion, Jugador jugador2) {
+	private boolean esFinDeJuego(Peticion peticion, Jugador jugador) {
 
 		// hay que cargarlo en base a historia
 		ArrayList<Peticion> condicionesFinDeJuegoList = new ArrayList<Peticion>();
