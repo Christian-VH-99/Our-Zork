@@ -35,6 +35,7 @@ public class Interprete {
 
 		/** Estructura */
 		/* verbo (_ _ _ _) sustantivo (_ _ _) objetoIndirecto **/
+		/* verbo (_ _ _ _) sustantivo **/
 		generarDiccionario();
 		separarComando(comando);
 	}
