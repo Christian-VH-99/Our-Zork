@@ -109,6 +109,48 @@ public class Interprete {
 		return null;
 	}
 
+	private void generarDiccionarioMazeRunner() {
+		itemsList = new ArrayList<String>();
+		ubicacionesList = new ArrayList<String>();
+		npcsList = new ArrayList<String>();
+		placesList = new ArrayList<String>();
+		accionesSinomimosMap = new HashMap<String, String>();
+		
+		/*-----------------------------------------------*/
+		accionesSinomimosMap.put("ir", "moverse");
+		accionesSinomimosMap.put("moverse", "moverse");
+		accionesSinomimosMap.put("moverme", "moverse");
+
+		accionesSinomimosMap.put("dar", "dar");
+		accionesSinomimosMap.put("darle", "dar");
+
+		accionesSinomimosMap.put("agarrar", "agarrar");
+		accionesSinomimosMap.put("tomar", "agarrar");
+		
+		accionesSinomimosMap.put("mirar", "mirar");
+		
+		accionesSinomimosMap.put("ayuda", "ayuda");
+		accionesSinomimosMap.put("ayudame", "ayuda");
+		
+		accionesSinomimosMap.put("informacion", "informacion");
+
+		/*-----------------------------------------------*/
+		itemsList.add("linterna");
+		/*-----------------------------------------------*/
+		ubicacionesList.add("puerta norte");
+		ubicacionesList.add("norte");
+		ubicacionesList.add("puerta sur");
+		ubicacionesList.add("sur");
+		ubicacionesList.add("zona de suministros");
+		ubicacionesList.add("este");
+		ubicacionesList.add("sala de mapas");
+		ubicacionesList.add("oeste");
+		/*-----------------------------------------------*/
+		npcsList.add("centinella");
+		/*-----------------------------------------------*/
+		placesList.add("pared");
+	}
+	
 	private void generarDiccionario() {
 		itemsList = new ArrayList<String>();
 		ubicacionesList = new ArrayList<String>();

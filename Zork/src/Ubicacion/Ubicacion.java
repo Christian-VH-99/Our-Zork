@@ -15,6 +15,7 @@ public class Ubicacion {
 	private List<Place> sitios;
 	private List<Conexion> conexiones;
 	private List<Npc> npcs;
+	private String mensajeDeIngreso; // agregado 25/6
 
 	public Ubicacion(String nombre, Character genero) {
 		this.genero = genero;
@@ -25,6 +26,11 @@ public class Ubicacion {
 		npcs = new LinkedList<>();
 	}
 
+	// agregado 25/6
+	public void setMensajeDeingreso(String mensajeDeIngreso) {
+		this.mensajeDeIngreso = mensajeDeIngreso;
+	}
+	
 //// AGREGAR ELEMENOTS A LAS LISTAS ////
 	public void agregarConexion(Conexion conexion) {
 		conexiones.add(conexion);
@@ -198,6 +204,10 @@ public class Ubicacion {
 			}
 		}
 		return -1;
+	}
+	
+	public void mostrarMensajeDeIngresoAUbicacion() {
+		System.out.println(mensajeDeIngreso);
 	}
 
 }
