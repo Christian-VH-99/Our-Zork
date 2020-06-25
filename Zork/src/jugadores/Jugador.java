@@ -23,6 +23,8 @@ public class Jugador {
 	
 	public void setUbicacionActual(Ubicacion ubicacionActual) {
 		this.ubicacionActual = ubicacionActual;
+		/*Descomentar para probar en historia nueva, con historia vieja, rompera porque no esa asignado*/
+		//ubicacionActual.mostrarMensajeDeIngresoAUbicacion();
 		ubicacionActual.describir();
 	}
 	

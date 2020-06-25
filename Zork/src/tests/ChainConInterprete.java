@@ -29,9 +29,7 @@ public class ChainConInterprete {
 	static Jugador jugador;
 	static Juego juego;
 	static Agarrar accion;
-	static Informacion informacion;
-
-	
+	static Informacion informacion;	
 
 	@BeforeClass
 	static public void before() {
