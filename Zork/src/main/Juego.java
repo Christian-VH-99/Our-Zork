@@ -25,49 +25,54 @@ public class Juego {
 	
 	
 	/**NOTA: este constructor inicializa la aventura en base a un archivo de aventura*/
-	public Juego(String filname) {
-		if(!cargarAventura(filname))
-			return;
-		ubicacionActual = ubicaciones.get(0);
-		System.out.println("Ingresa tu nombre: ");
-		nombreJugador = scann.nextLine();
-		System.out.println(nombreJugador + ubicacionActual.describir());
-		while(true) {
-			entradaJugador = scann.nextLine();
-			/* le mando al interprete lo qu eingreso el jugador para que me identifique que acciones realizar*/
-			interprete.set(entradaJugador);
-			
-			/* realizo la accion */
-			//accion(interprete.getVerbo(),interprete.getSustantivo());
-			
-			if(fin.comprobar(interprete.getVerbo(), interprete.getSustantivo())){
-				System.out.println(fin.getDescripcion());
-				return;
-			}
-			
-			/* limpio la entrada del jugador */
-			entradaJugador = "";
-		}
-	}
-	
-	public boolean cargarAventura(String filename) {
-		file = new File(filename);
-		if(!file.canRead()) {
-			System.out.println("Error al abrir el archivo para cargar la aventura...");
-			return false;
-		}
-		/* ahora trato de leer y cargar todos los elementos (ubicaciones, items, npcs,etc)*/
-		try {
-			//// Completar una vez decidido como va a ser nuestro archivo de entrada ////
-			return true;
-		}catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
+//	public Juego(String filname) {
+//		if(!cargarAventura(filname))
+//			return;
+//		ubicacionActual = ubicaciones.get(0);
+//		System.out.println("Ingresa tu nombre: ");
+//		nombreJugador = scann.nextLine();
+//		System.out.println(nombreJugador + ubicacionActual.describir());
+//		while(true) {
+//			entradaJugador = scann.nextLine();
+//			/* le mando al interprete lo qu eingreso el jugador para que me identifique que acciones realizar*/
+//			interprete.set(entradaJugador);
+//			
+//			/* realizo la accion */
+//			//accion(interprete.getVerbo(),interprete.getSustantivo());
+//			
+//			if(fin.comprobar(interprete.getVerbo(), interprete.getSustantivo())){
+//				System.out.println(fin.getDescripcion());
+//				return;
+//			}
+//			
+//			/* limpio la entrada del jugador */
+//			entradaJugador = "";
+//		}
+//	}
+//	
+//	public boolean cargarAventura(String filename) {
+//		file = new File(filename);
+//		if(!file.canRead()) {
+//			System.out.println("Error al abrir el archivo para cargar la aventura...");
+//			return false;
+//		}
+//		/* ahora trato de leer y cargar todos los elementos (ubicaciones, items, npcs,etc)*/
+//		try {
+//			//// Completar una vez decidido como va a ser nuestro archivo de entrada ////
+//			return true;
+//		}catch (Exception e) {
+//			System.out.println(e);
+//			return false;
+//		}
+//	}
 	
 //// constructor y  metodo generador para hacer los test para la primera entrega ////
 	public Juego() {
+	}
+	
+
+	public Juego(String nombre) {
+		this.nombreJugador = nombre;
 	}
 	
 	

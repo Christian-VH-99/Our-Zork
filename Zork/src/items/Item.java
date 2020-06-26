@@ -6,7 +6,7 @@ public class Item {
 	protected String nombre;
 	protected Character genero;
 	protected Character numero;
-	protected String mensaje;
+	//protected String mensaje;
 	
 	public Item(String nombre, Character genero, Character numero) {
 		this.nombre = nombre;
@@ -19,9 +19,9 @@ public class Item {
 		return nombre;
 	}
 	
-	public String getMensaje() {
-		return mensaje;
-	}
+//	public String getMensaje() {
+//		return mensaje;
+//	}
 	
 	public Character getGenero() {
 		return genero;
