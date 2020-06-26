@@ -88,7 +88,7 @@ public class Place {
 		return descripcionSitio + getNombre();
 	}
 
-	public static void buscarYMostrarItems(String nombrePlace, List<Place> sitios) {
+	public static void mostrarItems(String nombrePlace, List<Place> sitios) {
 
 		boolean enc = false;
 		for (Place place : sitios) {

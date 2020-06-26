@@ -25,7 +25,7 @@ public class Mirar extends AccionBase {
 				String nombrePlace = peticion.getNombrePlace();
 				List<Place> sitios = ubicacionActual.getPlace();
 				
-				Place.buscarYMostrarItems(nombrePlace ,sitios);
+				Place.mostrarItems(nombrePlace ,sitios);
 			
 			}else {	
 				/*si no le paso place, describe la ubicacion*/

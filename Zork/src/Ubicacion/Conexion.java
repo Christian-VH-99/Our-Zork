@@ -53,12 +53,7 @@ public class Conexion {
 	}
 
 	public boolean tieneObstaculo(String personaje) {
-		if(this.obstaculo != null) {
-			if(obstaculo.equals(personaje)) {
-				return true;
-			}
-		}
-		return false;
+		return this.obstaculo != null && obstaculo.equals(personaje);
 	}
 	
 }
