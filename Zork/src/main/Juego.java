@@ -1,5 +1,9 @@
 package main;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 //import java.io.File;
 import java.util.ArrayList;
 //import java.util.List;
@@ -40,8 +44,7 @@ public class Juego {
 		System.out.println("Ingrese su nombre");
 		Scanner entradaEscaner = new Scanner(System.in);
 		String entradaTeclado = entradaEscaner.nextLine();
-		;
-		;
+		String historial="esta es la historia de " + jugador.getNombre()+"\n";
 		juego = new Juego(jugador);
 		accion = cargarChainAcciones();
 		EntornoGson entorno = new EntornoGson();
@@ -64,12 +67,29 @@ public class Juego {
 				System.out.println("error");
 			} else {
 				accion.ejecutar(peticion, jugador);
+				historial+=entradaTeclado + "\n";
 			}
 
 			interprete.recargarInterprete();
 		} while (!juego.esFinDeJuego(peticion, jugador));
 		entradaEscaner.close();
+		escribirEnArchivo(historial);
 		System.out.println(jugador.getCondicion());
+	}
+
+	private static void escribirEnArchivo(String historial) {
+		File archivo2 = new File("acciones.txt");
+		try {
+			if (!archivo2.exists())
+				archivo2.createNewFile();
+			FileWriter escribArch = new FileWriter(archivo2);
+			BufferedWriter bufEscribir = new BufferedWriter(escribArch);
+			bufEscribir.write(historial);
+			bufEscribir.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private static Agarrar cargarChainAcciones() {
@@ -121,6 +141,6 @@ public class Juego {
 	}
 
 	public void setFinales(ArrayList<Peticion> finales) {
-		this.finales = finales;
+		Juego.finales = finales;
 	}
 }
