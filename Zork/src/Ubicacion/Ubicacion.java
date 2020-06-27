@@ -20,17 +20,15 @@ public class Ubicacion {
 	public Ubicacion(String nombre, Character genero) {
 		this.genero = genero;
 		this.nombre = nombre;
-
 		conexiones = new LinkedList<>();
 		sitios = new LinkedList<>();
 		npcs = new LinkedList<>();
 	}
 
-	// agregado 25/6
 	public void setMensajeDeingreso(String mensajeDeIngreso) {
 		this.mensajeDeIngreso = mensajeDeIngreso;
 	}
-	
+
 //// AGREGAR ELEMENOTS A LAS LISTAS ////
 	public void agregarConexion(Conexion conexion) {
 		conexiones.add(conexion);
@@ -86,12 +84,16 @@ public class Ubicacion {
 		}
 	}
 
-	public String getNpcs() {
+	public String listarNpcs() {
 		String personajes = "";
 		for (Npc npc : npcs) {
 			personajes += npc.getNombreNpc() + " ";
 		}
 		return personajes;
+	}
+
+	public List<Npc> getNpcs() {
+		return npcs;
 	}
 
 	public String getNombre() {
@@ -110,10 +112,6 @@ public class Ubicacion {
 //// DESCRIPCION DE LA UBICACION ////
 	public String describir() {
 
-		/*
-		 * Articulos determinados: el, la Articulos indererminados: una, uno
-		 */
-
 		String articuloDeterminado = genero == 'F' ? "la" : "el";
 
 		String cad = "Estas en " + articuloDeterminado + " " + getNombre() + ".";
@@ -123,6 +121,9 @@ public class Ubicacion {
 		if (!conexiones.isEmpty())
 			cad += cadenaConexiones();
 
+		for (Npc n : npcs) {
+			cad += " " + n.getDescripcionNpc() + ".";
+		}
 		return cad;
 	}
 
@@ -134,7 +135,7 @@ public class Ubicacion {
 			if (sitios.size() == 1)
 				cadenaSitios += sitio.toString() + ".";
 			else if (indice + 1 == sitios.size())
-				cadenaSitios += "y " + sitio.toString() + "";
+				cadenaSitios += "y " + sitio.toString() + ".";
 			else
 				cadenaSitios += sitio.toString() + " ";
 		}
@@ -157,9 +158,7 @@ public class Ubicacion {
 			articuloIndeterminado = location.getGenero() == 'F' ? "una" : "un";
 			if (conexiones.size() == 1) {
 				cadenaConexiones += articuloIndeterminado + " " + location.getNombre() + ".";
-			}
-			// si es el ultimo de la lista
-			else if (indice + 1 == conexiones.size()) {
+			} else if (indice + 1 == conexiones.size()) {
 				cadenaConexiones += "y " + articuloIndeterminado + " " + location.getNombre() + ".";
 			} else {
 				cadenaConexiones += articuloIndeterminado + " " + location.getNombre() + ", ";
@@ -169,8 +168,6 @@ public class Ubicacion {
 		return cadenaConexiones;
 	}
 
-	// TODO: cambiar valores de retorno por constantes (Enum)
-//// metodos que facilitan realizar las acciones ////
 	public Ubicacion buscarUbicacionAMoverse(String nombreLocation) {
 
 		Ubicacion location = null;
@@ -179,21 +176,18 @@ public class Ubicacion {
 
 			location = conexion.getLocation();
 
-			if (location.getNombre().equals(nombreLocation)) { 
-
+			if (location.getNombre().equals(nombreLocation)) {
 				if (conexion.habilitado == true) {
 					return location;
 				} else {
 					System.out.println("No podes pasar, hay un " + conexion.getObstaculo()); // TODO: revisar
-					return null; //REVISAR
+					return null; // REVISAR
 				}
 			}
 		}
 		return null;
 	}
 
-	// TODO: revisar este metodo, no es claro que devuelva valores, podria devolver
-	// una constante.
 	public int darANpc(Item item, String sujeto) {
 		for (Npc npc : npcs) {
 			if (npc.getNombreNpc().equals(sujeto)) {
@@ -205,7 +199,7 @@ public class Ubicacion {
 		}
 		return -1;
 	}
-	
+
 	public void mostrarMensajeDeIngresoAUbicacion() {
 		System.out.println(mensajeDeIngreso);
 	}

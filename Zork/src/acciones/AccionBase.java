@@ -4,10 +4,10 @@ import jugadores.Jugador;
 
 public abstract class AccionBase {
 
-	protected String nombre; 
+	protected String nombre;
 	protected AccionBase accionSiguiente;
 
-	/*handle*/
+	/* handle */
 	public abstract void ejecutar(Peticion peticion, Jugador jugador);
 
 	public AccionBase getAccionSiguiente() {

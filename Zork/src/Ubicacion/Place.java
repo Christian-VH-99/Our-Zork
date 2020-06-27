@@ -57,18 +57,22 @@ public class Place {
 		listaItems += genero == 'F' ? "la " : "el ";
 		listaItems += getNombre() + " hay ";
 		Item item;
-		for (int indice = 0; indice < items.size(); indice++) {
+		if (items.size() != 0) {
+			for (int indice = 0; indice < items.size(); indice++) {
 
-			item = items.get(indice);
-			if (items.size() == 1) {
-				listaItems += item.toString() + ".";
+				item = items.get(indice);
+				if (items.size() == 1) {
+					listaItems += item.toString() + ".";
+				}
+				// si es el ultimo item
+				else if (indice + 1 == items.size()) {
+					listaItems += "y " + item.toString() + ".";
+				} else {
+					listaItems += item.toString() + ", ";
+				}
 			}
-			// si es el ultimo item
-			else if (indice + 1 == items.size()) {
-				listaItems += "y " + item.toString() + ".";
-			} else {
-				listaItems += item.toString() + ", ";
-			}
+		} else {
+			listaItems = "No hay objetos aqui";
 		}
 		return listaItems;
 	}
@@ -88,7 +92,7 @@ public class Place {
 		return descripcionSitio + getNombre();
 	}
 
-	public static void buscarYMostrarItems(String nombrePlace, List<Place> sitios) {
+	public static void mostrarItems(String nombrePlace, List<Place> sitios) {
 
 		boolean enc = false;
 		for (Place place : sitios) {
@@ -98,7 +102,7 @@ public class Place {
 				enc = true;
 			}
 		}
-		if(!enc) {
+		if (!enc) {
 			System.out.print("sitio no existente para mirar");
 		}
 	}
