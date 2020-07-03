@@ -8,15 +8,25 @@ public class Jugador {
 	private Inventario inventario; 
 	private String nombre; 
 	private Ubicacion ubicacionActual;
+	private String condicion = "PERDISTE";
 
 	public Jugador(String nombre) {
 		this.nombre = nombre;
+		this.inventario= new Inventario();
 	}
 	
 	public void setInventario(Inventario inventario) {
 		this.inventario = inventario;
 	}
 	
+	public String getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(String condicion) {
+		this.condicion = condicion;
+	}
+
 	public Inventario getInventario() {
 		return inventario;
 	}
@@ -25,7 +35,7 @@ public class Jugador {
 		this.ubicacionActual = ubicacionActual;
 		/*Descomentar para probar en historia nueva, con historia vieja, rompera porque no esa asignado*/
 		//ubicacionActual.mostrarMensajeDeIngresoAUbicacion();
-		ubicacionActual.describir();
+		//ubicacionActual.describir();
 	}
 	
 	public Ubicacion getUbicacionActual() {

@@ -1,35 +1,39 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.BeforeClass;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import Ubicacion.Conexion;
+import Ubicacion.Direcciones;
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import acciones.Moverse;
 import acciones.Peticion;
 import items.Item;
 import jugadores.Jugador;
-import main.Juego;
+import main.Interprete;
+
 
 public class MoverseTest {
 
-	static private Juego juego;
-	static private Jugador jugador;
+	private Jugador jugador;
 	private Moverse moverse;
-	static private Ubicacion taberna;
-	static private Ubicacion hotel;
-	static private Ubicacion casa;
-
-	@BeforeClass
-	public static void before() {
+	private Ubicacion taberna;
+	private Ubicacion hotel;
+	private Ubicacion casa;
+	private Ubicacion playa;
+	Interprete interprete;
+	@Before
+	public void before() {
 
 		jugador = new Jugador("Juanito");
-		juego = new Juego(jugador);
 
 		taberna = new Ubicacion("taberna", 'F');
 		hotel = new Ubicacion("hotel", 'M');
 		casa = new Ubicacion("casa", 'F');
+		playa = new Ubicacion("playa", 'F');
 		Place mesa = new Place("Suelo", 'M', 'S');
 		Place cama = new Place("Cama", 'F', 'S');
 
@@ -38,38 +42,38 @@ public class MoverseTest {
 
 		taberna.agregarPlace(mesa);
 		hotel.agregarPlace(cama);
+		
+		Conexion conexion = new Conexion(hotel,Direcciones.NORTE);
+		Conexion conexion2 = new Conexion(casa,Direcciones.SUR,"fantasma");
+		taberna.agregarConexion(conexion);
+		taberna.agregarConexion(conexion2);
+		jugador.setUbicacionActual(taberna);
 	}
 
 	@Test
 	public void queSePuedaMoverAUnaUbicacionValida() {
-		juego.generarEntorno();
 		moverse = new Moverse();
 		moverse.ejecutar(new Peticion("moverse", "hotel", null, null, null), jugador);
 		Ubicacion ubicacion = jugador.getUbicacionActual();
-		assertEquals("Estas en el hotel. Hay una Cama.", ubicacion.describir());
+		assertEquals(ubicacion.equals(hotel),true);
 	}
 
 	@Test
 	public void queNOPuedaMoverAUnaUbicacionInvalidaDebidoAUnObstaculo() {
-		juego.generarEntorno();
 		moverse = new Moverse();
-		moverse.ejecutar(new Peticion("moverse", "taberna", null, null, null), jugador);
+		moverse.ejecutar(new Peticion("moverse", "casa", null, null, null), jugador);
 		Ubicacion ubicacion = jugador.getUbicacionActual();
-		assertEquals("Estas en el muelle. Hay un Rincon. Se ve a lo lejos una taberna, y un hotel.",
-				ubicacion.describir());
-
-		//No podes pasar, hay un fantasma
-		// TODO: agregar assert que compare la salida por consola.
+		assertEquals(ubicacion.equals(casa),false);
+		assertEquals(ubicacion.equals(taberna),true);
 	}
 
 	@Test
 	public void queNOPuedaMoverAUnaUbicacionInvalida() {
-		juego.generarEntorno();
 		moverse = new Moverse();
-//		moverse.ejecutar(new Peticion("moverse", casa, null, null, null), jugador);
-//		Ubicacion ubicacion = jugador.getUbicacionActual();
-//		assertEquals("Estas en el muelle. Hay un Rincon. Se ve a lo lejos una taberna, y un hotel.", ubicacion.describir());
-		/* deberia imprimir que no puedo moverme ahi */
-	}
+		moverse.ejecutar(new Peticion("moverse", "playa", null, null, null), jugador);
+		Ubicacion ubicacion = jugador.getUbicacionActual();
+		assertEquals(ubicacion.equals(playa),false);
+		assertEquals(ubicacion.equals(taberna),true);
 
+	}
 }

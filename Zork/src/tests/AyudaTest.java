@@ -5,7 +5,6 @@ import Ubicacion.Ubicacion;
 import acciones.Ayuda;
 import acciones.Peticion;
 import jugadores.Jugador;
-import main.Juego;
 
 public class AyudaTest {
 

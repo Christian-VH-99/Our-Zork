@@ -2,7 +2,6 @@ package acciones;
 
 import Ubicacion.Ubicacion;
 import jugadores.Jugador;
-import main.Juego;
 
 public class Ayuda extends AccionBase {
 

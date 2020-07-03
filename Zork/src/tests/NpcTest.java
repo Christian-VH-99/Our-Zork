@@ -26,9 +26,9 @@ public class NpcTest {
 
 	@Test
 	public void testAttackInvalido() {
-		
 		assertFalse(npc.attack(it1));//No sirvio porque quiere alcohol, no agua.
 	}
+	
 	@Test
 	public void testAttackValido() {
 		

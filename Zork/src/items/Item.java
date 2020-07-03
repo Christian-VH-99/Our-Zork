@@ -2,35 +2,33 @@ package items;
 
 public class Item {
 
-
 	protected String nombre;
 	protected Character genero;
 	protected Character numero;
 	protected String mensaje;
-	
+
 	public Item(String nombre, Character genero, Character numero) {
 		this.nombre = nombre;
 		this.genero = genero;
 		this.numero = numero;
 	}
-	
-//// GETTERS ////
+
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public String getMensaje() {
 		return mensaje;
 	}
-	
+
 	public Character getGenero() {
 		return genero;
 	}
-	public char getNumero(){
+
+	public char getNumero() {
 		return numero;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -40,8 +38,7 @@ public class Item {
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		return result;
 	}
-	
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -68,16 +65,16 @@ public class Item {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		String descripcionItem = "";
-		if(getNumero() == 'S')
+		if (getNumero() == 'S')
 			descripcionItem += getGenero() == 'F' ? "una " : "un ";
 		else
-			descripcionItem += getGenero() == 'F'? "unas ": "unos ";
+			descripcionItem += getGenero() == 'F' ? "unas " : "unos ";
 		descripcionItem += getNombre();
 		return descripcionItem;
 	}
-	
+
 }

@@ -118,8 +118,8 @@ public class ChainOfResponsabilityTest {
 	public void queSeEjecuteDar() {
 
 		juego.generarEntorno();
-		assertEquals("fantasma ", jugador.getUbicacionActual().getNpcs());
+		assertEquals("fantasma ", jugador.getUbicacionActual().listarNpcs());
 		accion.ejecutar(new Peticion("dar", null, "cerveza", "fantasma", null), jugador);
-		assertEquals("", jugador.getUbicacionActual().getNpcs());
+		assertEquals("", jugador.getUbicacionActual().listarNpcs());
 	}
 }

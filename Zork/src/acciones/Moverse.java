@@ -17,9 +17,12 @@ public class Moverse extends AccionBase {
 			Ubicacion ubicacionActual = jugador.getUbicacionActual();
 			String nombreUbicacion = peticion.getNombreUbicacion();
 			Ubicacion nuevaUbicacion = ubicacionActual.buscarUbicacionAMoverse(nombreUbicacion);
-
+			
+			
+			
 			if(nuevaUbicacion != null) {
-				jugador.setUbicacionActual(nuevaUbicacion);				
+				jugador.setUbicacionActual(nuevaUbicacion);
+				System.out.println(nuevaUbicacion.describir());
 			}else {
 				System.out.println("no podes moverte ahi"); //TODO: ver como diferenciar entre que haya un obstaculo y que no exista esa ubicacion
 			}

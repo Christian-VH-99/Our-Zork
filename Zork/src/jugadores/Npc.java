@@ -28,6 +28,17 @@ public class Npc {
 		this.debilidad = new Debilidad(debilidad.getCosa(),debilidad.getDialogoDerrota(), debilidad.getAccion());
 		
 	}
+	
+	public Npc(String nombre, Character genero, String descripcion, String talk, Character num) {
+		
+		this.nombre = nombre;
+		this.genero = genero;
+		this.descripcion = descripcion;
+		this.talk = talk;
+		this.numero = num;
+		this.debilidad=null;
+		
+	}
 
 	public String getNombreNpc() {
 		return nombre;
@@ -52,6 +63,7 @@ public class Npc {
 	public boolean attack(Item objeto) {
 		if(debilidad.efectividadItem(objeto)) {
 			System.out.println(debilidad.getDialogoDerrota());
+			
 			//setDerrotado(true);
 			return true;
 		}else

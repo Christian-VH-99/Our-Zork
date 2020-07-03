@@ -1,195 +1,146 @@
 package main;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+//import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
 
-import Ubicacion.*;
 import acciones.AccionBase;
 import acciones.Agarrar;
 import acciones.Ayuda;
 import acciones.Dar;
+import acciones.Hablar;
 import acciones.Informacion;
 import acciones.Mirar;
 import acciones.Moverse;
 import acciones.Peticion;
-//import acciones.Moverse;
-import items.Inventario;
-import items.Item;
-import jugadores.Debilidad;
+import acciones.Usar;
 import jugadores.Jugador;
-import jugadores.Npc;
 
 public class Juego {
 
-	private Interprete interprete;
-	private EndGame fin;
-	private File file;
-	private List<Ubicacion> ubicaciones;
 	private Jugador jugador;
-//	Scanner scann = new Scanner(System.in);
-	private String entradaJugador;
+	static ArrayList<Peticion> finales;
 
-	/**
-	 * NOTA: este constructor inicializa la aventura en base a un archivo de
-	 * aventura
-	 */
-//	public Juego(String filname) {
-//		if(!cargarAventura(filname))
-//			return;
-//		ubicacionActual = ubicaciones.get(0);
-//		System.out.println("Ingresa tu nombre: ");
-//		nombreJugador = scann.nextLine();
-//		System.out.println(nombreJugador + ubicacionActual.describir());
-//		while(true) {
-//			entradaJugador = scann.nextLine();
-//			/* le mando al interprete lo qu eingreso el jugador para que me identifique que acciones realizar*/
-//			interprete.set(entradaJugador);
-//			
-//			/* realizo la accion */
-//			//accion(interprete.getVerbo(),interprete.getSustantivo());
-//			
-//			if(fin.comprobar(interprete.getVerbo(), interprete.getSustantivo())){
-//				System.out.println(fin.getDescripcion());
-//				return;
-//			}
-//			
-//			/* limpio la entrada del jugador */
-//			entradaJugador = "";
-//		}
-//	}
-
-//	public boolean cargarAventura(String filename) {
-//		file = new File(filename);
-//		if(!file.canRead()) {
-//			System.out.println("Error al abrir el archivo para cargar la aventura...");
-//			return false;
-//		}
-//		/* ahora trato de leer y cargar todos los elementos (ubicaciones, items, npcs,etc)*/
-//		try {
-//			//// Completar una vez decidido como va a ser nuestro archivo de entrada ////
-//			return true;
-//		}catch (Exception e) {
-//			System.out.println(e);
-//			return false;
-//		}
-//	}
-//	
-//// constructor y  metodo generador para hacer los test para la primera entrega ////
 	public Juego(Jugador jugador) {
 		this.jugador = jugador;
 	}
 
-	public void generarEntorno() {
-
-		// Ubicaciones
-		Ubicacion taberna = new Ubicacion("taberna", 'F');
-		Ubicacion muelle = new Ubicacion("muelle", 'M');
-		Ubicacion hotel = new Ubicacion("hotel", 'M');
-
-		// Places
-		Place mesa = new Place("Mesa", 'F', 'S');
-		Place rincon = new Place("Rincon", 'M', 'S');
-		Place cama = new Place("Cama", 'F', 'S');
-
-		// inventario
-		Inventario inventario = new Inventario();
-		Item it1 = new Item("cerveza", 'F', 'S');
-//		Item it2 = new Item("espejo", 'M', 'S'); //agregado
-		inventario.agregarItem(it1);
-//		inventario.agregarItem(it2);
-
-		// set hotel
-		hotel.agregarPlace(cama);
-
-		// set taberna
-		mesa.agregarItem(new Item("cuchillo", 'M', 'S'));
-		mesa.agregarItem(new Item("cerveza", 'F', 'S'));
-
-		taberna.agregarPlace(mesa);
-
-		// set muelle
-		muelle.agregarConexion(new Conexion(taberna, "norte", "fantasma"));
-		muelle.agregarConexion(new Conexion(hotel, "oeste"));
-		rincon.agregarItem(new Item("espejo", 'M', 'S'));
-		muelle.agregarPlace(rincon);
-
-		Debilidad d1 = new Debilidad(it1, "- Me encanta la cerveza, te dejare pasar por esta vez", "cantar"); // TODO:
-																												// sacar
-		muelle.agregarNpc(new Npc("fantasma", 'M', "- '¡No puedes pasar!' El pirata fantasma no te dejará pasar",
-				"¡No hay nada que me digas que me haga cambiar de opinión!", d1, 'S'));
-
-		// trato al jugador
-//		ubicacionActual = muelle;
-		jugador.setUbicacionActual(muelle);
-		jugador.setInventario(inventario);
+	public Jugador getJugador() {
+		return jugador;
 	}
 
 	public static void main(String[] args) {
 
 		// TODO: este es un ejemplo de como se haria, ahora debemos armar
-		// esto pero con la historia final.
-		AccionBase accionBase;
-		Jugador jugador;
+
+		Jugador jugador = new Jugador("Juanito");
 		Juego juego;
-		Agarrar accion;
-		Informacion informacion;
-		jugador = new Jugador("Juanito");
+		AccionBase accion;
+		System.out.println("Ingrese su nombre");
+		Scanner entradaEscaner = new Scanner(System.in);
+		String entradaTeclado = entradaEscaner.nextLine();
+		String historial="esta es la historia de " + jugador.getNombre()+"\n";
 		juego = new Juego(jugador);
+		accion = cargarChainAcciones();
+		EntornoGson entorno = new EntornoGson();
+		entorno.deserializar();
+		jugador.setUbicacionActual(entorno.getUbicacion());
+		finales = entorno.getFinales();
+		Interprete interprete = new Interprete(entorno);
 
-		Mirar mirar = new Mirar();
-
-		accion = new Agarrar();// incial
-		accion.setSiguiente(mirar);
-
-		Ayuda ayuda = new Ayuda();
-		mirar.setSiguiente(ayuda);
-
-		informacion = new Informacion();
-		ayuda.setSiguiente(informacion);
-
-		Moverse moverse = new Moverse();
-		informacion.setSiguiente(moverse);
-
-		Dar dar = new Dar();
-		informacion.setSiguiente(dar);
-
-		/*********************************************/
-		juego.generarEntorno();
-		/*********************************************/
-
-		String entradaTeclado = null;
-		Scanner entradaEscaner = null;
-		Interprete interprete = null;
 		Peticion peticion = null;
+
+		System.out.println(entorno.getBienvenida());
 
 		do {
 			entradaEscaner = new Scanner(System.in);
 			entradaTeclado = entradaEscaner.nextLine();
 
-			interprete = new Interprete(entradaTeclado);
+			interprete.separarComando(entradaTeclado);
 			peticion = interprete.generarPeticion();
-			accion.ejecutar(peticion, jugador);
+			if (peticion == null) {
+				System.out.println("error");
+			} else {
+				accion.ejecutar(peticion, jugador);
+				historial+=entradaTeclado + "\n";
+			}
 
+			interprete.recargarInterprete();
 		} while (!juego.esFinDeJuego(peticion, jugador));
-
-		System.out.println("Fin del juego, felicidades!");
+		entradaEscaner.close();
+		escribirEnArchivo(historial);
+		System.out.println(jugador.getCondicion());
 	}
 
-	private boolean esFinDeJuego(Peticion peticion, Jugador jugador2) {
-		
-		// hay que cargarlo en base a historia
-		ArrayList<Peticion> condicionesFinDeJuegoList = new ArrayList<Peticion>();
-
-		
-		//NOTA: se debera comparar el estado actual del jugador con cada uno de los finales posibles
-		for (Peticion peticion2 : condicionesFinDeJuegoList) {
-			
+	private static void escribirEnArchivo(String historial) {
+		File archivo2 = new File("acciones.txt");
+		try {
+			if (!archivo2.exists())
+				archivo2.createNewFile();
+			FileWriter escribArch = new FileWriter(archivo2);
+			BufferedWriter bufEscribir = new BufferedWriter(escribArch);
+			bufEscribir.write(historial);
+			bufEscribir.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
-		
+	}
+
+	private static Agarrar cargarChainAcciones() {
+
+		Agarrar accion = new Agarrar();// incial
+
+		Mirar mirar = new Mirar();
+		accion.setSiguiente(mirar);
+
+		Ayuda ayuda = new Ayuda();
+		mirar.setSiguiente(ayuda);
+
+		Informacion informacion = new Informacion();
+		ayuda.setSiguiente(informacion);
+
+		Dar dar = new Dar();
+		informacion.setSiguiente(dar);
+
+		Usar usar = new Usar();
+		dar.setSiguiente(usar);
+
+		Moverse moverse = new Moverse();
+		usar.setSiguiente(moverse);
+
+		Hablar hablar = new Hablar();
+		moverse.setSiguiente(hablar);
+
+		return accion;
+	}
+
+	public boolean getEsFinDeJuego(Peticion peticion, Jugador jugador) {
+		return esFinDeJuego(peticion, jugador);
+	}
+
+	private boolean esFinDeJuego(Peticion peticion, Jugador jugador) {
+
+		if (peticion == null)
+			return false;
+		for (Peticion peticionFinal : finales) {
+
+			if (peticionFinal.equals(peticion)) {
+				if (peticionFinal.getNombreAccion().equals("dar")) {
+					jugador.setCondicion("GANASTE");
+				}
+				return true;
+			}
+		}
 		return false;
 	}
 
+	public void setFinales(ArrayList<Peticion> finales) {
+		Juego.finales = finales;
+	}
 }
