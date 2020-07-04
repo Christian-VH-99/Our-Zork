@@ -207,7 +207,6 @@ public class ChainConInterprete {
 		jugador.setUbicacionActual(actual);
 		accion = juego.cargarChainAcciones();
 
-//		interprete.separarComando("decir opcionB a Covit");
 		interprete.separarComando("hablar a Covit");
 		Peticion peticion = interprete.generarPeticion();
 		accion.ejecutar(peticion, jugador);
