@@ -13,6 +13,7 @@ import acciones.AccionBase;
 import acciones.Agarrar;
 import acciones.Ayuda;
 import acciones.Dar;
+import acciones.Decir;
 import acciones.Hablar;
 import acciones.Informacion;
 import acciones.Mirar;
@@ -35,8 +36,6 @@ public class Juego {
 	}
 
 	public static void main(String[] args) {
-
-		// TODO: este es un ejemplo de como se haria, ahora debemos armar
 
 		Jugador jugador = new Jugador("Juanito");
 		Juego juego;
@@ -92,7 +91,8 @@ public class Juego {
 		
 	}
 
-	private static Agarrar cargarChainAcciones() {
+	// saque static y private para tests
+	public static Agarrar cargarChainAcciones() {
 
 		Agarrar accion = new Agarrar();// incial
 
@@ -116,6 +116,10 @@ public class Juego {
 
 		Hablar hablar = new Hablar();
 		moverse.setSiguiente(hablar);
+		
+		// descomentar una vez probado todo
+		Decir decir  = new Decir();
+		hablar.setSiguiente(decir);
 
 		return accion;
 	}

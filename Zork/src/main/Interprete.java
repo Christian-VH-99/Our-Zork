@@ -21,6 +21,7 @@ public class Interprete {
 	ArrayList<String> ubicacionesList;
 	ArrayList<String> npcsList;
 	ArrayList<String> placesList;
+	ArrayList<String> opcionesList;
 	
 	
 
@@ -108,6 +109,7 @@ public class Interprete {
 			return new Peticion(nombreAccion, null, sustantivo, null, null);
 		}
 		
+		// aca no deberia ser objeto indirecto?
 		if (nombreAccion == "hablar" && npcsList.contains(sustantivo)) {
 			return new Peticion(nombreAccion, null, null, sustantivo, null);
 		}
@@ -125,54 +127,14 @@ public class Interprete {
 			return new Peticion(nombreAccion, null, null, null, sustantivo);
 		}
 
-//		if (nombreAccion == "mirar"){
-//
-//			return new Peticion(nombreAccion, null, null, null,null);
-//		}
+		// agregado
+		if (nombreAccion == "decir" && opcionesList.contains(sustantivo) && npcsList.contains(objetoIndirecto)) {
+
+			return new Peticion(nombreAccion, sustantivo, objetoIndirecto);
+		}
+
 		return null;
 	}
-
-//	private void generarDiccionarioMazeRunner() {
-//		itemsList = new ArrayList<String>();
-//		ubicacionesList = new ArrayList<String>();
-//		npcsList = new ArrayList<String>();
-//		placesList = new ArrayList<String>();
-//		accionesSinomimosMap = new HashMap<String, String>();
-//		
-//		/*-----------------------------------------------*/
-//		accionesSinomimosMap.put("ir", "moverse");
-//		accionesSinomimosMap.put("moverse", "moverse");
-//		accionesSinomimosMap.put("moverme", "moverse");
-//
-//		accionesSinomimosMap.put("dar", "dar");
-//		accionesSinomimosMap.put("darle", "dar");
-//
-//		accionesSinomimosMap.put("agarrar", "agarrar");
-//		accionesSinomimosMap.put("tomar", "agarrar");
-//		
-//		accionesSinomimosMap.put("mirar", "mirar");
-//		
-//		accionesSinomimosMap.put("ayuda", "ayuda");
-//		accionesSinomimosMap.put("ayudame", "ayuda");
-//		
-//		accionesSinomimosMap.put("informacion", "informacion");
-//
-//		/*-----------------------------------------------*/
-//		itemsList.add("linterna");
-//		/*-----------------------------------------------*/
-//		ubicacionesList.add("puerta norte");
-//		ubicacionesList.add("norte");
-//		ubicacionesList.add("puerta sur");
-//		ubicacionesList.add("sur");
-//		ubicacionesList.add("zona de suministros");
-//		ubicacionesList.add("este");
-//		ubicacionesList.add("sala de mapas");
-//		ubicacionesList.add("oeste");
-//		/*-----------------------------------------------*/
-//		npcsList.add("centinella");
-//		/*-----------------------------------------------*/
-//		placesList.add("pared");
-//	}
 
 	public Interprete(EntornoGson entorno) {
 		itemsList = entorno.getItemsList();
@@ -180,6 +142,16 @@ public class Interprete {
 		npcsList = entorno.getNpcsList();
 		placesList = entorno.getPlacesList();
 		accionesSinomimosMap = new HashMap<String, String>();
+		opcionesList = new ArrayList<>();
+		
+		/*para probar decir: descomentar*/
+//		npcsList = new ArrayList<String>();
+//		npcsList.add("Covit");
+		/*-----------------------------------------------*/
+		// se podria agregar a GSON si la cant de opciones es variable
+		opcionesList.add("opcionA");
+		opcionesList.add("opcionB");
+		opcionesList.add("opcionC");
 
 		/*-----------------------------------------------*/
 		accionesSinomimosMap.put("ir", "moverse");
@@ -246,6 +218,8 @@ public class Interprete {
 		accionesSinomimosMap.put("informacion", "informacion");
 		accionesSinomimosMap.put("guia", "informacion");
 
+		//agregado 4/7
+		accionesSinomimosMap.put("decir", "decir");
 
 
 	}

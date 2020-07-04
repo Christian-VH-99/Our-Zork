@@ -16,6 +16,9 @@ public class Peticion {
 	private String nombrePlace;
 	private Place place;
 
+	private String opcion;//agregado
+
+	// TODO: armar un contructor para cada accion y asi evitar nulls
 	public Peticion(String nombreAccion, String nombreUbicacion, String nombreItem, String nombreNpc,
 			String nombrePlace) {
 
@@ -26,7 +29,15 @@ public class Peticion {
 		this.nombreAccion = nombreAccion;
 	}
 
-	/** Constructor para mirar TODO: normalizar contructores */
+	// decir
+	public Peticion(String nombreAccion, String opcion,String nombreNpc) {
+
+		this.nombreNpc = nombreNpc;
+		this.nombreAccion = nombreAccion;
+		this.opcion = opcion;
+	}
+	
+	/*Ver si se puede sacar*/
 	public Peticion(Place place, String nombreAccion) {
 		this.place = place;
 		this.nombreAccion = nombreAccion;
@@ -66,6 +77,10 @@ public class Peticion {
 
 	public String getNombrePLace() {
 		return nombrePlace;
+	}
+
+	public String getOpcion() {
+		return opcion;
 	}
 
 	@Override
@@ -116,5 +131,4 @@ public class Peticion {
 			return false;
 		return true;
 	}
-
 }

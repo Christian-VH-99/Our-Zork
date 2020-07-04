@@ -4,28 +4,33 @@ import Ubicacion.Ubicacion;
 import jugadores.Jugador;
 import jugadores.Npc;
 
-public class Hablar extends AccionBase {
-
-	public Hablar() {
-		nombre = "hablar";
+public class Decir extends AccionBase {
+	
+	public Decir() {
+		nombre = "decir";
 	}
 
+	// decir opcionA a borracho
 	@Override
 	public void ejecutar(Peticion peticion, Jugador jugador) {
 		if (peticion.getNombreAccion() == this.nombre) {
 
 			Ubicacion ubicacionActual = jugador.getUbicacionActual();
 			String nombreNPC = peticion.getNombreNpc();
+			String opcion = peticion.getOpcion();
+			
+			// busco el npc
 			for (Npc n : ubicacionActual.getNpcs()) {
 				if (n.getNombreNpc().equals(nombreNPC)) {
-					System.out.println(n.getTalkNpc());
-					System.out.println(n.getSentenciasPosibles());//agregado 4/7
+					//mostrar sentencia del jugador
+					System.out.println(n.buscarSentenciaElegida(opcion));
+					//mostrar respuesta del NPC a este
+					System.out.println(n.buscarRespuestaASentenecia(opcion));
 				}
 			}
-
+			
 		} else {
 			this.accionSiguiente.ejecutar(peticion, jugador);
 		}
 	}
-
 }
