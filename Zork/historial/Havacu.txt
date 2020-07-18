@@ -1,0 +1,19 @@
+esta es la historia de Havacu
+ir a cripta	Estas en la cripta. Hay una vitrina y un sarcofago. Se ve a lo lejos un corredor. - ves a una Momia.
+hablar con Momia	Momia: Havacu, Yo solia ser el gran Tutmosis I todo el mundo estaba bajo mis pies, pero ahora solo hay polvo debajo de ellos
+->Para dialogar elegi una opcion.
+opcionA : ¿Cuanto tiempo queda hasta que se derrumbe esto?
+opcionB : ¿Como puedo salir?
+opcionC : ¿Hace cuanto estas aqui?
+
+elegir opcionA Momia	Havacu: ¿Cuanto tiempo queda hasta que se derrumbe esto?
+Momia: No queda mucho, corre y encuentra la salida lo antes psoble.
+ir a corredor	Estas en el corredor. Hay una columna y un descanso. Se ve a lo lejos un santuario, y una mazmorra.
+mirar	Estas en el corredor. Hay una columna y un descanso. Se ve a lo lejos un santuario, y una mazmorra.
+ir santuario	Estas en el santuario. Hay una mesa y un estante. - Observas a Yugi .
+usar espada	No posees ese objeto.
+tomar espada	Tienes una espada en tu inventario.
+usar espada	has utilizado una espada.
+
+Al usar la espada, la cual contenia un espiritu en su interio, fuiste poseido y ataqcaste a Yugi. Pero este se defendio con su carta trampa, haciendo que realices la auto-moricion
+PERDISTE
