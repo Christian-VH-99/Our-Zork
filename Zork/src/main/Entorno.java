@@ -2,10 +2,6 @@ package main;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Ramiro
 import Ubicacion.Conexion;
 import Ubicacion.Direcciones;
 import Ubicacion.Place;
@@ -19,23 +15,12 @@ public class Entorno {
 
 	private Ubicacion ubicacion;
 	private String bienvenida;
-<<<<<<< HEAD
-	//private EndGame fin;
-	private ArrayList<Peticion> finales = new ArrayList<Peticion>(4);
-
-	ArrayList<String> itemsList=new ArrayList<String>(16);
-	ArrayList<String> ubicacionesList=new ArrayList<String>(12);
-	ArrayList<String> npcsList=new ArrayList<String>(5);
-	ArrayList<String> placesList=new ArrayList<String>(16);
-
-=======
 	private ArrayList<FinDeJuego> finales = new ArrayList<FinDeJuego>(4);
 
 	ArrayList<String> itemsList = new ArrayList<String>(16);
 	ArrayList<String> ubicacionesList = new ArrayList<String>(12);
 	ArrayList<String> npcsList = new ArrayList<String>(5);
 	ArrayList<String> placesList = new ArrayList<String>(16);
->>>>>>> Ramiro
 
 	public Ubicacion getUbicacion() {
 		return ubicacion;
@@ -45,11 +30,7 @@ public class Entorno {
 		return bienvenida;
 	}
 
-<<<<<<< HEAD
-	public ArrayList<Peticion> getFinales() {
-=======
 	public ArrayList<FinDeJuego> getFinales() {
->>>>>>> Ramiro
 		return finales;
 	}
 
@@ -71,11 +52,7 @@ public class Entorno {
 
 	public void generarEntornoDentroPiramide() {
 
-<<<<<<< HEAD
-		bienvenida = "Después de tanto esfuerzo lograste llegar a la sala de joyas donde encontraste lo que tanto anhelaba El Udyat!!!, pero por culpa de la maldición impuesta Horus por robar su tesoro las salas de la pirámide se están cerrando, tenes que salir lo antes posible.";
-=======
 		bienvenida = "Después de tanto esfuerzo lograste llegar a la sala de joyas donde encontraste lo que tanto anhelabas, El Udyat!!!, pero por culpa de la maldición impuesta por Horus al robar su tesoro, las salas de la pirámide se están derrumbando, tenes que salir lo antes posible.";
->>>>>>> Ramiro
 
 		// ubicaciones
 		Ubicacion joyeria = new Ubicacion("joyeria", 'F');
@@ -91,53 +68,21 @@ public class Entorno {
 		Place altarJoyeria = new Place("altar", 'M', 'S');
 		Place cofreJoyeria = new Place("cofre", 'M', 'S');
 		Place ambonCapilla = new Place("ambon", 'M', 'S');
-<<<<<<< HEAD
-		Place vitrinaCapilla = new Place("vitrina", 'F', 'S');
-		Place altarVestibulo = new Place("altar", 'M', 'S');
-		Place paredVestibulo = new Place("Mesa", 'F', 'S');
-		Place cupulaCorredor = new Place("cupula", 'F', 'S');
-		Place alfombraCorredor = new Place("alfombra", 'F', 'S');
-=======
 		Place vasarCapilla = new Place("vasar", 'M', 'S');
 		Place sagrarioVestibulo = new Place("sagrario", 'M', 'S');
 		Place arconVestibulo = new Place("muro", 'M', 'S');
 		Place columnaCorredor = new Place("columna", 'F', 'S');
 		Place descansoCorredor = new Place("descanso", 'M', 'S');
->>>>>>> Ramiro
 		Place mesaSantuario = new Place("mesa", 'F', 'S');
 		Place estanteSantuario = new Place("estante", 'M', 'S');
 		Place sarcofagoCripta = new Place("sarcofago", 'M', 'S');
 		Place vitrinaCripta = new Place("vitrina", 'F', 'S');
 		Place vasijaMazmorra = new Place("vasija", 'F', 'S');
-<<<<<<< HEAD
-		Place bancoMazmorra = new Place("banco", 'F', 'S');
-=======
 		Place paredMazmorra = new Place("pared", 'F', 'S');
->>>>>>> Ramiro
 		Place esqueletoTrampa = new Place("esqueleto", 'M', 'S');
 		Place piedraTrampa = new Place("piedra", 'F', 'S');
 
 		// Items
-<<<<<<< HEAD
-		altarJoyeria.agregarItem(new Item("Udyat", 'M', 'S'));
-		Item exodia = new Item("Exodia", 'M', 'S');
-		cofreJoyeria.agregarItem(exodia);
-		vitrinaCapilla.agregarItem(new Item("rubi", 'F', 'S'));
-		Item anj = new Item("Anj", 'F', 'S');
-		ambonCapilla.agregarItem(anj);
-		altarVestibulo.agregarItem(new Item("Sphynx", 'M', 'S'));
-		paredVestibulo.agregarItem(new Item("jeroglificos", 'M', 'P'));//
-		alfombraCorredor.agregarItem(new Item("cetro", 'M', 'S'));
-		cupulaCorredor.agregarItem(new Item("tallado", 'M', 'S'));//
-		mesaSantuario.agregarItem(new Item("espada", 'F', 'S'));
-		estanteSantuario.agregarItem(new Item("estatuilla", 'F', 'S'));
-		sarcofagoCripta.agregarItem(new Item("corona", 'F', 'S'));
-		vitrinaCripta.agregarItem(new Item("chacal", 'M', 'S'));
-		vasijaMazmorra.agregarItem(new Item("serpiente", 'F', 'S'));
-		bancoMazmorra.agregarItem(new Item("cadenas", 'F', 'P'));//
-		esqueletoTrampa.agregarItem(new Item("calavera", 'F', 'S'));
-		piedraTrampa.agregarItem(new Item("daga", 'F', 'S'));
-=======
 		altarJoyeria.agregarItem(new Item("Udyat", 'M', 'S', 100));
 		Item exodia = new Item("Exodia", 'M', 'S', 70);
 		cofreJoyeria.agregarItem(exodia);
@@ -156,35 +101,21 @@ public class Entorno {
 		paredMazmorra.agregarItem(new Item("cadenas", 'F', 'P', 0));//
 		esqueletoTrampa.agregarItem(new Item("calavera", 'F', 'S', -100));
 		piedraTrampa.agregarItem(new Item("daga", 'F', 'S', 0));
->>>>>>> Ramiro
 
 		// agregar places
 		joyeria.agregarPlace(altarJoyeria);
 		joyeria.agregarPlace(cofreJoyeria);
-<<<<<<< HEAD
-		capilla.agregarPlace(vitrinaCapilla);
-		capilla.agregarPlace(ambonCapilla);
-		vestibulo.agregarPlace(altarVestibulo);
-		vestibulo.agregarPlace(paredVestibulo);
-		corredor.agregarPlace(cupulaCorredor);
-		corredor.agregarPlace(alfombraCorredor);
-=======
 		capilla.agregarPlace(vasarCapilla);
 		capilla.agregarPlace(ambonCapilla);
 		vestibulo.agregarPlace(sagrarioVestibulo);
 		vestibulo.agregarPlace(arconVestibulo);
 		corredor.agregarPlace(columnaCorredor);
 		corredor.agregarPlace(descansoCorredor);
->>>>>>> Ramiro
 		santuario.agregarPlace(mesaSantuario);
 		santuario.agregarPlace(estanteSantuario);
 		cripta.agregarPlace(vitrinaCripta);
 		cripta.agregarPlace(sarcofagoCripta);
-<<<<<<< HEAD
-		mazmorra.agregarPlace(bancoMazmorra);
-=======
 		mazmorra.agregarPlace(paredMazmorra);
->>>>>>> Ramiro
 		mazmorra.agregarPlace(vasijaMazmorra);
 		fosa.agregarPlace(esqueletoTrampa);
 		fosa.agregarPlace(piedraTrampa);
@@ -200,40 +131,6 @@ public class Entorno {
 		mazmorra.agregarConexion(new Conexion(fosa, Direcciones.OESTE));
 
 		// NPCs bobos
-<<<<<<< HEAD
-
-		vestibulo.agregarNpc(new Npc("Espectro", 'M', "- ves a un Espectro",
-				"¡Estas paredes nos cuentan la eterna busqueda de la Anj, ella merodea por las mazmorras esperando a que alguien se la entregue!",
-				'S'));
-		cripta.agregarNpc(new Npc("Momia", 'F', "- ves a una Momia",
-				"Yo solia ser el gran Tutmosis I todo el mundo estaba bajo mis pies, pero ahora solo hay polvo debajo de ellos",
-				'S'));
-		fosa.agregarNpc(new Npc("Ermitanio", 'M', "- ves a un Ermitanio ",
-				"La unica salida de aca es usando esa daga JAJAJAJAJAJAJA", 'S'));
-
-		// NPC utiles
-		Debilidad deIsis = new Debilidad(anj,
-				"Gracias aventurero por encontrar mi llave, te concedere la salida al exterior como agradecimiento", "dar");
-		Debilidad deYugi = new Debilidad(exodia, "NO PUEDO CREER QUE LO HAYAS ENCONTRADO!!, como recompensa te sacare con mi collar del milenio", "dar");
-		mazmorra.agregarNpc(new Npc("Isis", 'F', "- Observas a una deidad poderosa, es Isis",
-				"He estado en la busqueda de mi llave por años", deIsis, 'S'));
-		santuario.agregarNpc(new Npc("Yugi", 'M', "- Observas a Yugi ", "Para poder salir tienes 2 opciones, darme a exodia o usar la espada", deYugi, 'S'));
-		ubicacion = joyeria;
-
-		// final1: dar carta a Yugi
-		Peticion final1 = new Peticion("dar", null, "Exodia", "Yugi", null);
-
-		// final2: dar llave a Isis
-		Peticion final2 = new Peticion("dar", null, "Anj", "Isis", null);
-
-		// final3: usar espda
-		Peticion final3 = new Peticion("usar", null, "espada", null, null);
-
-		// final4: usar daga
-		Peticion final4 = new Peticion("usar", null, "daga", null, null);
-		
-		
-=======
 		Npc momia = new Npc("Momia", 'F', "- ves a una Momia",
 				"Yo solia ser el gran Tutmosis I todo el mundo estaba bajo mis pies, pero ahora solo hay polvo debajo de ellos",
 				'S');
@@ -303,16 +200,11 @@ public class Entorno {
 		FinDeJuego final4 = new FinDeJuego(new Peticion("usar", null, "daga", null, null),
 				"No soportabas mas el olor hediondo que tenia el Ermitanio y decidiste suicidarte.", "PERDISTE");
 
->>>>>>> Ramiro
 		finales.add(final1);
 		finales.add(final2);
 		finales.add(final3);
 		finales.add(final4);
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> Ramiro
 		/*-----------------------------------------------*/
 		itemsList.add("Exodia");
 		itemsList.add("Udyat");
@@ -320,22 +212,14 @@ public class Entorno {
 		itemsList.add("Sphynx");
 		itemsList.add("jeroglificos");
 		itemsList.add("cetro");
-<<<<<<< HEAD
-		itemsList.add("tallado");
-=======
 		itemsList.add("pergamino");
->>>>>>> Ramiro
 		itemsList.add("espada");
 		itemsList.add("estatuilla");
 		itemsList.add("corona");
 		itemsList.add("chacal");
 		itemsList.add("serpiente");
 		itemsList.add("cadenas");
-<<<<<<< HEAD
-		itemsList.add("cadaver");
-=======
 		itemsList.add("calavera");
->>>>>>> Ramiro
 		itemsList.add("daga");
 		itemsList.add("Anj");
 		/*-----------------------------------------------*/
@@ -359,15 +243,6 @@ public class Entorno {
 		npcsList.add("Ermitanio");
 		npcsList.add("Isis");//
 		/*-----------------------------------------------*/
-<<<<<<< HEAD
-		placesList.add("cofre");
-		placesList.add("altar");
-		placesList.add("ambon");
-		placesList.add("exhibidor");
-		placesList.add("mesa");
-		placesList.add("cupula");
-		placesList.add("banco");
-=======
 		placesList.add("altar");
 		placesList.add("cofre");
 		placesList.add("ambon");
@@ -377,18 +252,10 @@ public class Entorno {
 		placesList.add("columna");
 		placesList.add("descanso");
 		placesList.add("mesa");
->>>>>>> Ramiro
 		placesList.add("estante");
 		placesList.add("sarcofago");
 		placesList.add("vitrina");
 		placesList.add("vasija");
-<<<<<<< HEAD
-		placesList.add("piedra");
-		placesList.add("alrededor");
-		placesList.add("inventario");
-
-	}
-=======
 		placesList.add("pared");
 		placesList.add("esqueleto");
 		placesList.add("piedra");
@@ -446,5 +313,4 @@ public class Entorno {
 		ubicacion = muelle;
 	}
 
->>>>>>> Ramiro
 }
