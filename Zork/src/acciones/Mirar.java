@@ -1,6 +1,10 @@
 package acciones;
 
 import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import jugadores.Jugador;
@@ -11,9 +15,7 @@ public class Mirar extends AccionBase {
 		nombre = "mirar";
 	}
 
-	/* Patron */
-	@Override
-	public void ejecutar(Peticion peticion, Jugador jugador) {
+	public String ejecutar(Peticion peticion, Jugador jugador, JLabel imagen) {
 
 		if (peticion.getNombreAccion() == this.nombre) {
 
@@ -23,22 +25,24 @@ public class Mirar extends AccionBase {
 
 				switch (peticion.getNombrePlace()) {
 				case "alrededor":
-					System.out.println(ubicacionActual.describir());
+					salida = ubicacionActual.describir();
+					imagen.setIcon(new ImageIcon("img/" + ubicacionActual.getNombre() + ".jpg"));// bien
 					break;
 				case "inventario":
-					System.out.println(jugador.getInventario().listarItems());
+					salida = jugador.getInventario().listarItems();
 					break;
 				default:
 					String nombrePlace = peticion.getNombrePlace();
 					List<Place> sitios = ubicacionActual.getPlace();
-					Place.mostrarItems(nombrePlace, sitios);
+					salida = Place.mostrarItems(nombrePlace, sitios, imagen);
 					break;
 				}
 			}
-
+			return salida;
 		} else {
 
-			this.accionSiguiente.ejecutar(peticion, jugador);
+			salida = this.accionSiguiente.ejecutar(peticion, jugador, imagen);
+			return salida;
 		}
 	}
 

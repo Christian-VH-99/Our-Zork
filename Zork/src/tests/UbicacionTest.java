@@ -26,7 +26,7 @@ public class UbicacionTest {
 		actual = new Ubicacion("pieza", 'F');
 		u1 = new Ubicacion("terraza", 'F');
 		p1 = new Place("mesa", 'F', 'S');
-		i1 = new Item("miel", 'F', 'S');
+		i1 = new Item("miel", 'F', 'S',10);
 		actual.agregarPlace(p1);
 		actual.agregarConexion(new Conexion(u1, Direcciones.NORTE));
 		d1 = new Debilidad(i1, " Me encanta la miel, te dejare pasar solo por esta vez", "remover");
@@ -38,13 +38,7 @@ public class UbicacionTest {
 	@Test
 	public void testDescripcion() {
 		assertEquals("Estas en la pieza. Hay una mesa. Se ve a lo lejos una terraza. - No podras pasar.",actual.describir());
-		actual.getConexiones();
-		actual.listarNpcs();
-		
 
-		System.out.println("////saque al fantasma/////");
-
-		actual.listarNpcs();
 	}
 
 	@Test

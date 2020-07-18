@@ -3,6 +3,9 @@ package Ubicacion;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import items.Item;
 
 public class Place {
@@ -39,7 +42,7 @@ public class Place {
 		Item aux = null;
 		for (Item item : items) {
 			if (item.getNombre().equals(nombreItem)) {
-				aux = new Item(item.getNombre(), item.getGenero(), item.getNumero());
+				aux = new Item(item.getNombre(), item.getGenero(), item.getNumero(), item.getPuntaje());
 				items.remove(item);
 				break;
 			}
@@ -59,7 +62,6 @@ public class Place {
 		Item item;
 		if (items.size() != 0) {
 			for (int indice = 0; indice < items.size(); indice++) {
-
 				item = items.get(indice);
 				if (items.size() == 1) {
 					listaItems += item.toString() + ".";
@@ -92,19 +94,35 @@ public class Place {
 		return descripcionSitio + getNombre();
 	}
 
-	public static void mostrarItems(String nombrePlace, List<Place> sitios) {
-
+	public static String mostrarItems(String nombrePlace, List<Place> sitios, JLabel imagen) {
+		String salida = "";
 		boolean enc = false;
+
 		for (Place place : sitios) {
 
 			if (place.nombre.equals(nombrePlace)) {
-				System.out.println(place.listarItems());
+				// System.out.println(place.listarItems());
+				salida += place.listarItems();
 				enc = true;
+				if(place.listarItems().equals("No hay objetos aqui")) 
+					imagen.setIcon(new ImageIcon("img/" + place.getName() + ".jpg"));
+				else
+					imagen.setIcon(new ImageIcon("img/" + place.itemsConcatenados() + ".jpg"));
 			}
 		}
 		if (!enc) {
-			System.out.print("sitio no existente para mirar");
+			salida += "sitio no existente para mirar";
 		}
+		return salida;
+	}
+	
+	private String itemsConcatenados() {
+		String itemsConcatenado="";
+		for(Item i: items) {
+			itemsConcatenado+=i.getNombre();
+		}
+		return itemsConcatenado;
+		
 	}
 
 }
