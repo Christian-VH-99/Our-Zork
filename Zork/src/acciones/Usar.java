@@ -1,5 +1,7 @@
 package acciones;
 
+import javax.swing.JLabel;
+
 import items.Inventario;
 import items.Item;
 import jugadores.Jugador;
@@ -11,24 +13,23 @@ public class Usar extends AccionBase {
 	}
 
 	@Override
-	public void ejecutar(Peticion peticion, Jugador jugador) {
+	public String ejecutar(Peticion peticion, Jugador jugador, JLabel imagen) {
 		if (peticion.getNombreAccion() == this.nombre) {
 
 			Inventario inventario = jugador.getInventario();
-			// Ubicacion ubicacionActual = jugador.getUbicacionActual();
 			String nombreItem = peticion.getNombreItem();
-			// String nombreNPC = peticion.getNombreNpc();
 
 			Item item = inventario.getItem(nombreItem);
 			if (item != null) {
-				System.out.println("has utilizado " + item.toString() + ".");
+				peticion.setEjecuto(true);
+				salida = "has utilizado " + item.toString() + ".";
 
 			} else {
-				System.out.println("No posees ese objeto.");
+				salida = "No posees ese objeto.";
 			}
-
+			return salida;
 		} else {
-			accionSiguiente.ejecutar(peticion, jugador);
+			return accionSiguiente.ejecutar(peticion, jugador, imagen);
 		}
 
 	}

@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import acciones.Peticion;
 import items.Item;
 //import items.Item;
 import jugadores.Npc;
@@ -15,7 +16,7 @@ public class Ubicacion {
 	private List<Place> sitios;
 	private List<Conexion> conexiones;
 	private List<Npc> npcs;
-	private String mensajeDeIngreso; // agregado 25/6
+	private String mensajeDeIngreso;
 
 	public Ubicacion(String nombre, Character genero) {
 		this.genero = genero;
@@ -168,7 +169,7 @@ public class Ubicacion {
 		return cadenaConexiones;
 	}
 
-	public Ubicacion buscarUbicacionAMoverse(String nombreLocation) {
+	public Ubicacion buscarUbicacionAMoverse(String nombreLocation, String personaje) {
 
 		Ubicacion location = null;
 
@@ -180,24 +181,31 @@ public class Ubicacion {
 				if (conexion.habilitado == true) {
 					return location;
 				} else {
-					System.out.println("No podes pasar, hay un " + conexion.getObstaculo()); // TODO: revisar
-					return null; // REVISAR
+					personaje += "No podes pasar, hay un " + conexion.getObstaculo();
+					return null;
 				}
 			}
 		}
 		return null;
 	}
 
-	public int darANpc(Item item, String sujeto) {
+	public String darANpc(Item item, String sujeto, Peticion peticion) {
+		
 		for (Npc npc : npcs) {
 			if (npc.getNombreNpc().equals(sujeto)) {
-				if (npc.attack(item))
-					return 1;
-				else
-					return 0;
+				if (npc.attack(item)) {
+					removeNpc(npc.getNombreNpc());
+					peticion.setEjecuto(true);
+					return npc.getDebilidad().getDialogoDerrota();
+				}
+				else {
+					return "No ha servido de nada, itenta con otra cosa." ;
+				}
+						
 			}
 		}
-		return -1;
+		
+		return "El personaje con el que quieres interactuar no existe.";
 	}
 
 	public void mostrarMensajeDeIngresoAUbicacion() {

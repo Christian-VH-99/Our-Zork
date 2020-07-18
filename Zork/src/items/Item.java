@@ -6,11 +6,13 @@ public class Item {
 	protected Character genero;
 	protected Character numero;
 	protected String mensaje;
+	protected int puntaje;
 
-	public Item(String nombre, Character genero, Character numero) {
+	public Item(String nombre, Character genero, Character numero, int puntaje) {
 		this.nombre = nombre;
 		this.genero = genero;
 		this.numero = numero;
+		this.puntaje = puntaje;
 	}
 
 	public String getNombre() {
@@ -27,6 +29,10 @@ public class Item {
 
 	public char getNumero() {
 		return numero;
+	}
+
+	public int getPuntaje() {
+		return puntaje;
 	}
 
 	@Override

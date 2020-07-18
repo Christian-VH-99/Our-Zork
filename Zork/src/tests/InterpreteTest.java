@@ -13,7 +13,7 @@ public class InterpreteTest {
 	@Before
 	public void before() {
 		EntornoGson entorno = new EntornoGson();
-		entorno.deserializar();
+		entorno.deserializar("piramide.json");
 		interprete = new Interprete(entorno);
 	}
 	
@@ -21,7 +21,7 @@ public class InterpreteTest {
 	/** por ahora se abarcan estos tres casos */
 	@Test
 	public void queSeSepareCorrectamenteElComando() {
-		//interprete = new Interprete("ir a la taberna");
+		
 		interprete.separarComando("ir a la taberna");
 		assertEquals("ir taberna null", interprete.toString());
 		interprete.recargarInterprete();

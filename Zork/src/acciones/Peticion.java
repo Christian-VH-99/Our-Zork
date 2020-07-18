@@ -4,17 +4,19 @@ import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import items.Item;
 
-/*Request*/
 public class Peticion {
 
-	private Ubicacion ubicacion; // TODO: reem por los de abajo
-	private Item item;// TODO: reem por los de abajo
+	private Ubicacion ubicacion;
+	private Item item;
 	private String nombreItem;
 	private String nombreAccion;
 	private String nombreUbicacion;
 	private String nombreNpc;
 	private String nombrePlace;
 	private Place place;
+	private Boolean ejecuto;
+
+	private String opcion;
 
 	public Peticion(String nombreAccion, String nombreUbicacion, String nombreItem, String nombreNpc,
 			String nombrePlace) {
@@ -24,14 +26,27 @@ public class Peticion {
 		this.nombreItem = nombreItem;
 		this.nombreNpc = nombreNpc;
 		this.nombreAccion = nombreAccion;
+		this.ejecuto = false;
 	}
 
-	/** Constructor para mirar TODO: normalizar contructores */
+	public Peticion(String nombreAccion, String opcion, String nombreNpc) {
+
+		this.nombreNpc = nombreNpc;
+		this.nombreAccion = nombreAccion;
+		this.ejecuto = false;
+		this.opcion = opcion;
+	}
+
 	public Peticion(Place place, String nombreAccion) {
 		this.place = place;
 		this.nombreAccion = nombreAccion;
+		this.ejecuto = false;
 	}
 
+	public Peticion(String nombreAccion) {
+		this.nombreAccion = nombreAccion;
+	}
+	
 	public String getNombrePlace() {
 		return nombrePlace;
 	}
@@ -66,6 +81,10 @@ public class Peticion {
 
 	public String getNombrePLace() {
 		return nombrePlace;
+	}
+
+	public String getOpcion() {
+		return opcion;
 	}
 
 	@Override
@@ -117,4 +136,11 @@ public class Peticion {
 		return true;
 	}
 
+	public Boolean getEjecuto() {
+		return ejecuto;
+	}
+
+	public void setEjecuto(Boolean ejecuto) {
+		this.ejecuto = ejecuto;
+	}
 }

@@ -1,0 +1,12 @@
+esta es la historia de Christian
+mirar	Estas en el muelle. Hay un suelo. Se ve a lo lejos una taberna. - ves un Pirata fantasma. .
+mirar suelo	En el suelo hay un espejo, una cerveza, y una barreta.
+agarrar barreta	Tienes una barreta en tu inventario.
+agarrar cerveza	Tienes una cerveza en tu inventario.
+hablar con Pirata	Pirata: Christian, '¡No hay nada que me digas que me haga cambiar de opinión!'
+dar barreta a Pirata	No ha servido de nada, itenta con otra cosa.
+dar cerveza a Pirata	¡Me encanta la cerveza de raiz!' El pirata fantasma se veía entusiasmado por tu ofrecimiento... sin embargo, cuando lo rociaste comenzó a desintegrarse. La mitad de arriba de su cuerpo se desvaneció, y las piernas inmediatamente echaron a correr.
+ir a la taberna	Estas en la taberna.
+
+¡Enhorabuena! Llegaste a la taberna, donde te espera una noche de borrachera con Grog y otros colegas piratas.
+GANASTE

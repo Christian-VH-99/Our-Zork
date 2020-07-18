@@ -21,6 +21,14 @@ public class Inventario {
 
 	}
 
+	public int contarPuntaje() {
+		int puntajeTotal = 0;
+		for (Item item : inventory.values()) {
+			puntajeTotal += item.getPuntaje();
+		}
+		return puntajeTotal;
+	}
+
 	public String listarItems() {
 		int i = 0;
 		if (inventory.values().size() == 0) {
@@ -46,7 +54,7 @@ public class Inventario {
 		Item aux = null;
 		for (Item item : inventory.values()) {
 			if (item.getNombre().equals(objeto)) {
-				aux = new Item(item.getNombre(), item.getGenero(), item.getNumero());
+				aux = new Item(item.getNombre(), item.getGenero(), item.getNumero(), item.getPuntaje());
 				inventory.remove(objeto);
 				break;
 			}

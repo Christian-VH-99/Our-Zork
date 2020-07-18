@@ -5,11 +5,6 @@ import java.util.HashMap;
 
 import acciones.Peticion;
 
-/*
- * Se encarga de validar la semantica de un comando en base al diccionario y devuelve la peticion armada para 
- * luego pasarsela a Chain of responsability.
- * No valida que la ubicacion pasada sea accesible en ese momento o 
- * que el item ingresado este disponible, de validar esto debera encargarse cada Accion*/
 public class Interprete {
 
 	private String verbo = null;
@@ -21,9 +16,7 @@ public class Interprete {
 	ArrayList<String> ubicacionesList;
 	ArrayList<String> npcsList;
 	ArrayList<String> placesList;
-	
-	
-
+	ArrayList<String> opcionesList;
 
 	public Interprete(String comando) {
 		/** Ir a la taberna */
@@ -31,10 +24,9 @@ public class Interprete {
 		/** Estructura */
 		/* verbo (_ _ _ _) sustantivo (_ _ _) objetoIndirecto **/
 		/* verbo (_ _ _ _) sustantivo **/
-		//generarDiccionario(null);
 		separarComando(comando);
 	}
-	
+
 	public void recargarInterprete() {
 		verbo = null;
 		sustantivo = null;
@@ -45,7 +37,7 @@ public class Interprete {
 
 		String[] splited = comando.split(" ");
 
-		verbo = splited[0]; // siempre sera asi.
+		verbo = splited[0];
 
 		int i = 0;
 		if (splited.length > 1) {
@@ -59,7 +51,7 @@ public class Interprete {
 			if (j + 1 < splited.length) {
 				j = j + 1;
 			}
-			while (splited[j].length() < 3 && j + 1 < splited.length) {
+			while (splited[j].length() <= 3 && j + 1 < splited.length) {
 				j++;
 			}
 
@@ -81,19 +73,15 @@ public class Interprete {
 		String nombreAccion = accionesSinomimosMap.get(verbo);
 
 		if (nombreAccion == "moverse") {
-			// tengo que buscar una ubicacion
 			if (ubicacionesList.contains(sustantivo)) {
-				// paso el sustantivo en el casillero de la ubicacion.
 				return new Peticion(nombreAccion, sustantivo, null, null, null);
 			}
 		}
 
-		// tengo que validar que haya un item y un npc
 		if (nombreAccion == "dar" && itemsList.contains(sustantivo) && npcsList.contains(objetoIndirecto)) {
 			return new Peticion(nombreAccion, null, sustantivo, objetoIndirecto, null);
 		}
 
-		// tengo que validar que haya un sustantivo valido
 		if (nombreAccion == "agarrar" && itemsList.contains(sustantivo)) {
 
 			return new Peticion(nombreAccion, null, sustantivo, null, null);
@@ -107,11 +95,11 @@ public class Interprete {
 		if (nombreAccion == "usar" && itemsList.contains(sustantivo)) {
 			return new Peticion(nombreAccion, null, sustantivo, null, null);
 		}
-		
+
 		if (nombreAccion == "hablar" && npcsList.contains(sustantivo)) {
 			return new Peticion(nombreAccion, null, null, sustantivo, null);
 		}
-		
+
 		if (nombreAccion == "hablar" && npcsList.contains(objetoIndirecto)) {
 			return new Peticion(nombreAccion, null, null, objetoIndirecto, null);
 		}
@@ -119,60 +107,19 @@ public class Interprete {
 		if (sustantivo == null) {
 			sustantivo = "alrededor";
 		}
-		
+
 		if (nombreAccion == "mirar" && placesList.contains(sustantivo)) {
 
 			return new Peticion(nombreAccion, null, null, null, sustantivo);
 		}
 
-//		if (nombreAccion == "mirar"){
-//
-//			return new Peticion(nombreAccion, null, null, null,null);
-//		}
+		if (nombreAccion == "elegir" && opcionesList.contains(sustantivo) && npcsList.contains(objetoIndirecto)) {
+
+			return new Peticion(nombreAccion, sustantivo, objetoIndirecto);
+		}
+
 		return null;
 	}
-
-//	private void generarDiccionarioMazeRunner() {
-//		itemsList = new ArrayList<String>();
-//		ubicacionesList = new ArrayList<String>();
-//		npcsList = new ArrayList<String>();
-//		placesList = new ArrayList<String>();
-//		accionesSinomimosMap = new HashMap<String, String>();
-//		
-//		/*-----------------------------------------------*/
-//		accionesSinomimosMap.put("ir", "moverse");
-//		accionesSinomimosMap.put("moverse", "moverse");
-//		accionesSinomimosMap.put("moverme", "moverse");
-//
-//		accionesSinomimosMap.put("dar", "dar");
-//		accionesSinomimosMap.put("darle", "dar");
-//
-//		accionesSinomimosMap.put("agarrar", "agarrar");
-//		accionesSinomimosMap.put("tomar", "agarrar");
-//		
-//		accionesSinomimosMap.put("mirar", "mirar");
-//		
-//		accionesSinomimosMap.put("ayuda", "ayuda");
-//		accionesSinomimosMap.put("ayudame", "ayuda");
-//		
-//		accionesSinomimosMap.put("informacion", "informacion");
-//
-//		/*-----------------------------------------------*/
-//		itemsList.add("linterna");
-//		/*-----------------------------------------------*/
-//		ubicacionesList.add("puerta norte");
-//		ubicacionesList.add("norte");
-//		ubicacionesList.add("puerta sur");
-//		ubicacionesList.add("sur");
-//		ubicacionesList.add("zona de suministros");
-//		ubicacionesList.add("este");
-//		ubicacionesList.add("sala de mapas");
-//		ubicacionesList.add("oeste");
-//		/*-----------------------------------------------*/
-//		npcsList.add("centinella");
-//		/*-----------------------------------------------*/
-//		placesList.add("pared");
-//	}
 
 	public Interprete(EntornoGson entorno) {
 		itemsList = entorno.getItemsList();
@@ -180,6 +127,13 @@ public class Interprete {
 		npcsList = entorno.getNpcsList();
 		placesList = entorno.getPlacesList();
 		accionesSinomimosMap = new HashMap<String, String>();
+		opcionesList = new ArrayList<>();
+
+		/*-----------------------------------------------*/
+		// se podria agregar a GSON si la cant de opciones es variable
+		opcionesList.add("opcionA");
+		opcionesList.add("opcionB");
+		opcionesList.add("opcionC");
 
 		/*-----------------------------------------------*/
 		accionesSinomimosMap.put("ir", "moverse");
@@ -191,7 +145,6 @@ public class Interprete {
 		accionesSinomimosMap.put("dirigirse", "moverse");
 		accionesSinomimosMap.put("desplazarse", "moverse");
 
-		
 		accionesSinomimosMap.put("dar", "dar");
 		accionesSinomimosMap.put("darle", "dar");
 		accionesSinomimosMap.put("entregar", "dar");
@@ -203,7 +156,7 @@ public class Interprete {
 		accionesSinomimosMap.put("regalar", "dar");
 		accionesSinomimosMap.put("ceder", "dar");
 		accionesSinomimosMap.put("obsequiar", "dar");
-		
+
 		accionesSinomimosMap.put("preguntar", "hablar");
 		accionesSinomimosMap.put("hablar", "hablar");
 		accionesSinomimosMap.put("charlar", "hablar");
@@ -212,21 +165,18 @@ public class Interprete {
 		accionesSinomimosMap.put("dialogar", "hablar");
 		accionesSinomimosMap.put("conversar", "hablar");
 
-
 		accionesSinomimosMap.put("agarrar", "agarrar");
 		accionesSinomimosMap.put("pillar", "agarrar");
 		accionesSinomimosMap.put("tomar", "agarrar");
 		accionesSinomimosMap.put("recoger", "agarrar");
 		accionesSinomimosMap.put("atrapar", "agarrar");
 		accionesSinomimosMap.put("obtener", "agarrar");
-		
-		
+
 		accionesSinomimosMap.put("clavar", "usar");
 		accionesSinomimosMap.put("usar", "usar");
 		accionesSinomimosMap.put("aplicar", "usar");
 		accionesSinomimosMap.put("emplear", "usar");
 		accionesSinomimosMap.put("gastar", "usar");
-		
 
 		accionesSinomimosMap.put("mirar", "mirar");
 		accionesSinomimosMap.put("observar", "mirar");
@@ -238,16 +188,17 @@ public class Interprete {
 		accionesSinomimosMap.put("examinar", "mirar");
 		accionesSinomimosMap.put("curiosear", "mirar");
 		accionesSinomimosMap.put("pispear", "mirar");
-		accionesSinomimosMap.put("fijarse", "mirar");
-		
+		accionesSinomimosMap.put("fijarse", "mirar");	
+		accionesSinomimosMap.put("abrir", "mirar");
+
 		accionesSinomimosMap.put("ayuda", "ayuda");
 		accionesSinomimosMap.put("ayudame", "ayuda");
 
 		accionesSinomimosMap.put("informacion", "informacion");
 		accionesSinomimosMap.put("guia", "informacion");
 
-
-
+		accionesSinomimosMap.put("decir", "elegir");
+		accionesSinomimosMap.put("elegir", "elegir");
 	}
 
 	public String getVerbo() {
@@ -267,20 +218,4 @@ public class Interprete {
 		return verbo + " " + sustantivo + " " + objetoIndirecto;
 	}
 
-//	public static void main(String[] args) {
-//
-//		Interprete interprete = new Interprete("Dar cerveza al fantasma");
-//
-//		if (interprete.generarPeticion() != null) {
-//			System.out.println("No se pudo interpretar el comando");
-//		} else {
-//			Peticion peticion = interprete.generarPeticion();
-//
-//			System.out.println(peticion.getNombreAccion());
-//			System.out.println(peticion.getNombreItem());
-//			System.out.println(peticion.getNombreNPC());
-//
-//		}
-//
-//	}
 }
