@@ -2,21 +2,16 @@ package acciones;
 
 import java.util.Iterator;
 
+import javax.swing.JLabel;
+
 import Ubicacion.Place;
 import Ubicacion.Ubicacion;
 import items.Inventario;
 import items.Item;
 import jugadores.Jugador;
-import main.Juego;
 
 public class Agarrar extends AccionBase {
 
-	/*
-	 * Debera: -recibir un item -verificar si existe en la location actual (clase
-	 * iterprete) -accionar el evento -mostrar mensaje al jugador -activar
-	 * items/conexiones -sacar el item la lista de items de la locaction actual
-	 * (porque ya fue usado el item) -ponerlo en el inventario
-	 */
 	Ubicacion ubicacionActual;
 	Inventario inventario;
 	Item item;
@@ -27,9 +22,7 @@ public class Agarrar extends AccionBase {
 
 	/* Patron */
 	@Override
-	public void ejecutar(Peticion peticion, Jugador jugador) {
-
-		// TODO: Separar este comportamiento en funciones y usar variables miembro.
+	public String ejecutar(Peticion peticion, Jugador jugador, JLabel imagen) {
 		if (peticion.getNombreAccion() == this.nombre) {
 
 			item = peticion.getItem();
@@ -38,19 +31,21 @@ public class Agarrar extends AccionBase {
 			while (it.hasNext()) {
 				Place sitio = it.next();
 				item = sitio.getItem(peticion.getNombreItem());
+				Place.mostrarItems(sitio.getName(), jugador.getUbicacionActual().getPlace(), imagen);
 				if (item != null)
 					break;
 			}
 			if (item != null) {
+				peticion.setEjecuto(true);
 				jugador.getInventario().agregarItem(item);
-				String salida = "Tienes " + item.toString() + "en tu inventario.";
-				System.out.println(salida);
-			} else
-				System.out.println("El objeto que quiere agarrar no existe");
-
+				salida = "Tienes " + item.toString() + " en tu inventario.";
+			} else {
+				salida = "El objeto que quiere agarrar no existe";
+			}
+			return salida;
 		} else {
 
-			this.accionSiguiente.ejecutar(peticion, jugador);
+			return this.accionSiguiente.ejecutar(peticion, jugador, imagen);
 		}
 
 	}

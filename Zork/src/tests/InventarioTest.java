@@ -11,20 +11,20 @@ public class InventarioTest {
 
 	@Test
 	public void testInventory() {
-		
+
 		Inventario in = new Inventario();
-		Item it1 = new Item("mesa",'F','S');		
-		Item it2 = new Item("botella",'F','S');
-		
+		Item it1 = new Item("miel", 'F', 'S', 10);
+		Item it2 = new Item("botella", 'F', 'S', 10);
+
 		in.agregarItem(it1);
 		in.agregarItem(it2);
-		
-		assertEquals("En tu inventario hay: una mesa, y una botella.", in.listarItems());
-		
+
+		assertEquals(true, in.buscarItem("botella"));
+		assertEquals(true, in.buscarItem("miel"));
+
 		in.getItem("botella");
-		
-		assertEquals("En tu inventario hay: una mesa.", in.listarItems());
-		
+		assertEquals(false, in.buscarItem("botella"));
+
 	}
 
 }

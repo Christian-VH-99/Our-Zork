@@ -1,0 +1,6 @@
+esta es la historia de pepe
+ir cripta	Estas en la cripta. Hay una vitrina y un sarcofago. Se ve a lo lejos un corredor. - ves a una Momia.
+ir corredor	Estas en el corredor. Hay una columna y una descanso. Se ve a lo lejos un santuario, y una mazmorra.
+ir santuario	Estas en el santuario. Hay una mesa y un estante. - Observas a Yugi .
+agarrar espada	Tienes una espada en tu inventario.
+usar espada	has utilizado una espada.

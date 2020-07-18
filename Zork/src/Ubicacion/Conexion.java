@@ -1,21 +1,19 @@
 package Ubicacion;
 
-//import java.util.Iterator;
+public class Conexion {
 
-public class Conexion { 
-	
 	protected Ubicacion ubicacion;
-	protected String direccion;
+	protected Direcciones direccion;
 	protected boolean habilitado;
 	protected String obstaculo;
-	
-	public Conexion(Ubicacion ubicacion, String direccion) {
+
+	public Conexion(Ubicacion ubicacion, Direcciones direccion) {
 		this.ubicacion = ubicacion;
 		this.direccion = direccion;
 		this.habilitado = true;
 	}
-	
-	public Conexion(Ubicacion ubicacion, String direccion, String obstaculo) {
+
+	public Conexion(Ubicacion ubicacion, Direcciones direccion, String obstaculo) {
 		this.ubicacion = ubicacion;
 		this.direccion = direccion;
 		this.obstaculo = obstaculo;
@@ -26,26 +24,27 @@ public class Conexion {
 	public Ubicacion getLocation() {
 		return ubicacion;
 	}
-	
+
 	public String getObstaculo() {
 		return obstaculo;
 	}
-	public String getDireccion() {
+
+	public Direcciones getDireccion() {
 		return direccion;
 	}
-	
-	public boolean getHabilitado(){
+
+	public boolean getHabilitado() {
 		return habilitado;
 	}
-	
-////   ////
+
 	public void habilitar() {
 		habilitado = true;
-	}	
+	}
+
 	public void deshabilitar() {
 		habilitado = false;
 	}
-	
+
 	public String descripcion() {
 		String descripcion = "Al ";
 		descripcion += getDireccion() + ubicacion.getNombre();
@@ -53,12 +52,7 @@ public class Conexion {
 	}
 
 	public boolean tieneObstaculo(String personaje) {
-		if(this.obstaculo != null) {
-			if(obstaculo.equals(personaje)) {
-				return true;
-			}
-		}
-		return false;
+		return this.obstaculo != null && obstaculo.equals(personaje);
 	}
-	
+
 }
